@@ -1,7 +1,6 @@
 package com.ndn.http.utils;
 
 import java.io.IOException;
-import java.util.concurrent.CompletableFuture;
 
 import com.ndn.http.consts.Keys;
 
@@ -158,7 +157,7 @@ public class NdnUtils {
 
     }
 
-    public void sendInterest(final Interest interest) {
+    public void sendInterest(final Interest interest, InterestCallback callback) {
         // Silence the warning from Interest wire encode.
         Interest.setDefaultCanBePrefix(true);
 
@@ -166,12 +165,11 @@ public class NdnUtils {
         // send interest
         System.out.println("Sending interest for: " + interest.getName().toUri());
         try {
-            Counter1 counter = new Counter1();
 
             System.out.println("Express name " + interest.getName().toUri());
-            sendFace.expressInterest(interest.getName(), counter, counter);
+            sendFace.expressInterest(interest.getName(), callback, callback);
 
-            while (counter.callbackCount_ < 1) {
+            while (callback.callbackCount_ < 1) {
                 sendFace.processEvents();
                 // We need to sleep for a few milliseconds so we don't use 100% of
                 // the CPU.

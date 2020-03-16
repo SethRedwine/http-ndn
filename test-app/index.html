@@ -14,6 +14,7 @@
             }, (e) => {
                 console.log("=== BAD ===\n", e);
             }).then((data) => {
+                console.log(data);
                 const el = document.getElementById("response-text");
                 el.innerHTML = data;
             });

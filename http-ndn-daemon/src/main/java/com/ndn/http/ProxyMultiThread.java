@@ -2,15 +2,19 @@ package com.ndn.http;
 
 import java.io.*;
 import java.net.*;
+import java.nio.ByteBuffer;
 // import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
 import com.ndn.http.utils.HttpFormatException;
 import com.ndn.http.utils.HttpRequestResponseParser;
+import com.ndn.http.utils.InterestCallback;
 import com.ndn.http.utils.NdnUtils;
 
 import net.named_data.jndn.Interest;
 import net.named_data.jndn.Name;
+import net.named_data.jndn.OnData;
+import net.named_data.jndn.OnTimeout;
 import net.named_data.jndn.Data;
 
 public class ProxyMultiThread {
@@ -73,6 +77,7 @@ class ThreadProxy extends Thread {
         try {
             final byte[] request = new byte[1024];
             final InputStream inFromClient = sClient.getInputStream();
+            final OutputStream outToClient = sClient.getOutputStream();
 
             // a new thread for uploading to the server
             new Thread() {
@@ -91,11 +96,8 @@ class ThreadProxy extends Thread {
                                     + parser.getRequestMethod() + "/" + parser.getRequestUrl());
                             final Interest interest = new Interest(name);
 
-                            ndnUtils.sendInterest(interest);
-                            // CompletableFuture<Data> data = ndnUtils.sendInterest(interest);
-                            // data.thenAccept(d -> {
-                            // System.out.println(d.getName() + ": " + d.getContent());
-                            // });
+                            InterestCallback call = new InterestCallback(outToClient, SERVER_URL, SERVER_PORT);
+                            ndnUtils.sendInterest(interest, call);
 
                             // outToServer.write(request, 0, bytes_read);
                             // outToServer.flush();
@@ -111,30 +113,6 @@ class ThreadProxy extends Thread {
                     // }
                 }
             }.start();
-
-            /*
-             * // connects a socket to the server try { server = new Socket(SERVER_URL,
-             * SERVER_PORT); } catch (final IOException e) { final PrintWriter out = new
-             * PrintWriter(new OutputStreamWriter(outToClient)); out.flush(); out.close();
-             * throw new RuntimeException(e); } // a new thread to manage streams from
-             * client to server (UPLOAD) final InputStream inFromServer =
-             * server.getInputStream(); final OutputStream outToServer =
-             * server.getOutputStream();
-             * 
-             * // current thread manages streams from server to client (DOWNLOAD) int
-             * bytes_read; try { while ((bytes_read = inFromServer.read(reply)) != -1) {
-             * final HttpRequestResponseParser parser = new HttpRequestResponseParser();
-             * final String rep = new String(reply); parser.parseRequest(rep);
-             * 
-             * System.out.println("\nREPLY: " + parser.getRequestLine());
-             * 
-             * outToClient.write(reply, 0, bytes_read); outToClient.flush(); } } catch
-             * (final IOException e) { e.printStackTrace(); } catch (final
-             * HttpFormatException e) { e.printStackTrace(); } finally { try { if (server !=
-             * null) server.close(); if (client != null) client.close(); } catch (final
-             * IOException e) { e.printStackTrace(); } } outToClient.close(); //
-             * System.out.println("Closed stream: outToClient");
-             */
         } catch (final IOException e) {
             e.printStackTrace();
         }
