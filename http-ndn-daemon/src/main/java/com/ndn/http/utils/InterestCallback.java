@@ -1,14 +1,10 @@
 package com.ndn.http.utils;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.net.Socket;
-import java.net.http.HttpResponse;
 import java.nio.ByteBuffer;
 
+import net.named_data.jndn.Name.Component;
+import net.named_data.jndn.Name;
 import net.named_data.jndn.Data;
 import net.named_data.jndn.Interest;
 import net.named_data.jndn.OnData;
@@ -30,7 +26,7 @@ public class InterestCallback implements OnData, OnTimeout {
     public void onData(Interest interest, Data data) {
         try {
             ++callbackCount_;
-            System.out.println("Got data packet with name " + data.getName().toUri());
+            // System.out.println("Got data packet with name " + data.getName().toUri());
 
             String response = buildResponse(interest, data);
             byte[] resp = response.getBytes();
@@ -57,7 +53,9 @@ public class InterestCallback implements OnData, OnTimeout {
             body += (char) content.get(i);
         }
 
-        return "HTTP/1.1 200 OK\n" + "Access-Control-Allow-Origin: * \n"
+        String httpVersion = new Name(new Component[]{interest.getName().get(2), interest.getName().get(3)}).toUri();
+
+        return httpVersion + " 200 OK\n" + "Access-Control-Allow-Origin: * \n"
                 + "Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept\n"
                 + "Cache-Control: no-cache\n" + "\n" + body.toString();
     }

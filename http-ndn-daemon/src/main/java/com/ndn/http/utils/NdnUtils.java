@@ -100,7 +100,7 @@ public class NdnUtils {
         Interest.setDefaultCanBePrefix(true);
     }
 
-    public void registerTestPrefix(String serverUrl, Integer port) {
+    public void registerPrefix(String serverUrl, Integer port) {
         new Thread() {
             public void run() {
                 try {
@@ -141,7 +141,7 @@ public class NdnUtils {
     class Counter1 implements OnData, OnTimeout {
         public void onData(Interest interest, Data data) {
             ++callbackCount_;
-            System.out.println("Got data packet with name " + data.getName().toUri());
+            // System.out.println("Got data packet with name " + data.getName().toUri());
             ByteBuffer content = data.getContent().buf();
             for (int i = content.position(); i < content.limit(); ++i)
                 System.out.print((char) content.get(i));

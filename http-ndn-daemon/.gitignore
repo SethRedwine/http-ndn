@@ -21,6 +21,7 @@ buildNumber.properties
 #
 # Visual Studio Code
 #
+.sts4-cache/
 .settings/
 .classpath
 .project

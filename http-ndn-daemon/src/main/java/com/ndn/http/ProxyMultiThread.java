@@ -41,10 +41,10 @@ public class ProxyMultiThread {
             server = new ServerSocket(localHttpPort);
 
             NdnUtils ndnUtils = NdnUtils.get();
+                ndnUtils.registerPrefix(host, remoteport);
 
             while (true) {
                 new ThreadProxy(server.accept(), host, remoteport);
-                ndnUtils.registerTestPrefix(host, remoteport);
             }
         } catch (final Exception e) {
             System.err.println(e);
