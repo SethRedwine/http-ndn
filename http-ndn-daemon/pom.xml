@@ -31,6 +31,11 @@
             <artifactId>android</artifactId>
             <version>4.1.1.4</version>
         </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.9.10.4</version>
+        </dependency>
     </dependencies>
     <build>
         <pluginManagement>
@@ -128,7 +133,6 @@
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
                             <mainClass>com.ndn.http.ProxyMultiThread</mainClass>
-                            <!-- <mainClass>com.ndn.http.TestPublishAsyncNfd</mainClass> -->
                         </manifest>
                         <manifestEntries>
                             <Class-Path>.</Class-Path>

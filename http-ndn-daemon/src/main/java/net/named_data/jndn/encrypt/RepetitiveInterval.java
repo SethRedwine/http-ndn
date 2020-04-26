@@ -269,7 +269,7 @@ public class RepetitiveInterval implements Comparable {
     return compare((RepetitiveInterval)other) == 0;
   }
 
-  public int hashCode() 
+  public int hashCode()
   {
     long longStartDate = Double.doubleToLongBits(startDate_);
     long longEndDate = Double.doubleToLongBits(endDate_);
@@ -344,8 +344,7 @@ public class RepetitiveInterval implements Comparable {
     else if (repeatUnit_ == RepeatUnit.DAY) {
       long durationDays = (long)(timePointDateMilliseconds - startDate_) /
                           MILLISECONDS_IN_DAY;
-      if (durationDays % nRepeats_ == 0)
-        return true;
+        return durationDays % nRepeats_ == 0;
     }
     else {
       Calendar timePointDate = toCalendar(timePointDateMilliseconds);
@@ -358,8 +357,7 @@ public class RepetitiveInterval implements Comparable {
           timePointDate.get(Calendar.YEAR) - startDate.get(Calendar.YEAR);
         int monthDifference = 12 * yearDifference +
           timePointDate.get(Calendar.MONTH) - startDate.get(Calendar.MONTH);
-        if (monthDifference % nRepeats_ == 0)
-          return true;
+          return monthDifference % nRepeats_ == 0;
       }
       else if (repeatUnit_ == RepeatUnit.YEAR &&
                timePointDate.get(Calendar.DAY_OF_MONTH) ==
@@ -368,8 +366,7 @@ public class RepetitiveInterval implements Comparable {
                  startDate.get(Calendar.MONTH)) {
         int difference = timePointDate.get(Calendar.YEAR) -
           startDate.get(Calendar.YEAR);
-        if (difference % nRepeats_ == 0)
-          return true;
+          return difference % nRepeats_ == 0;
       }
     }
 
@@ -384,7 +381,7 @@ public class RepetitiveInterval implements Comparable {
   public static double
   toDateOnlyMilliseconds(double timePoint)
   {
-    long result = (long)Math.round(timePoint);
+    long result = Math.round(timePoint);
     result -= result % MILLISECONDS_IN_DAY;
     return result;
   }

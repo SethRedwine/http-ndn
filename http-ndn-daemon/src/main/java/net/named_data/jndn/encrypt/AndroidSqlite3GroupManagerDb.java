@@ -73,10 +73,7 @@ public class AndroidSqlite3GroupManagerDb extends Sqlite3GroupManagerDbBase {
     Cursor cursor = database_.rawQuery(SELECT_hasSchedule, new String[] { name });
 
     try {
-      if (cursor.moveToNext())
-        return true;
-      else
-        return false;
+        return cursor.moveToNext();
     } finally {
       cursor.close();
     }

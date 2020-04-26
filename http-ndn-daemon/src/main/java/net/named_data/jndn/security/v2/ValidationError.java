@@ -117,6 +117,6 @@ public class ValidationError {
     return result;
   }
 
-  private int code_;
-  private String info_;
+  private final int code_;
+  private final String info_;
 }

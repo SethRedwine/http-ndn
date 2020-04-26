@@ -274,9 +274,9 @@ public class FullPSync2017 extends PSyncProducerBase
 
     public final InvertibleBloomLookupTable iblt_;
     public boolean isRemoved_ = false;
-  };
+  }
 
-  /**
+    /**
    * Send the sync interest for full synchronization. This forms the interest
    * name: /<sync-prefix>/<own-IBLT>. This cancels any pending sync interest
    * we sent earlier on the face.
@@ -318,7 +318,7 @@ public class FullPSync2017 extends PSyncProducerBase
     face_.callLater
       (syncInterestLifetime_ / 2 + jitter,
        new Runnable() {
-         public void run() { 
+         public void run() {
            sendSyncInterest();
          }
        });
@@ -444,7 +444,7 @@ public class FullPSync2017 extends PSyncProducerBase
       } catch (Exception ex) {
         logger_.log(Level.INFO, "onSyncInterest: Error in sendSyncData", ex);
       }
-      
+
       return;
     }
 
@@ -474,11 +474,11 @@ public class FullPSync2017 extends PSyncProducerBase
    * @param content The content of the Data.
    */
   private void
-  sendSyncData(Name name, Blob content) 
+  sendSyncData(Name name, Blob content)
     throws IOException, EncodingException, TpmBackEnd.Error, PibImpl.Error,
       KeyChain.Error
   {
-    logger_.log(Level.FINE, 
+    logger_.log(Level.FINE,
       "Checking if the Data will satisfy our own pending interest");
 
     Name nameWithIblt = new Name();

@@ -365,7 +365,7 @@ public class Schedule {
   toIsoString(double msSince1970)
   {
     return dateFormat.format
-      (Common.millisecondsSince1970ToDate((long)Math.round(msSince1970)));
+      (Common.millisecondsSince1970ToDate(Math.round(msSince1970)));
   }
 
   private static SimpleDateFormat

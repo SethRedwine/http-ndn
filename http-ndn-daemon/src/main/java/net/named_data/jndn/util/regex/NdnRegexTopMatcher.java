@@ -97,7 +97,7 @@ public class NdnRegexTopMatcher extends NdnRegexMatcherBase {
         result.append(item.substring(1, item.length() - 1));
 
       if (item.charAt(0) == '\\') {
-        int index = Integer.parseInt(item.substring(1, item.length()));
+        int index = Integer.parseInt(item.substring(1));
 
         if (0 == index) {
           for (Name.Component component : matchResult_)
@@ -161,7 +161,7 @@ public class NdnRegexTopMatcher extends NdnRegexMatcherBase {
       secondaryMatcher_ = new NdnRegexPatternListMatcher
         ("<.*>*" + expr, secondaryBackrefManager_);
     else
-      expr = expr.substring(1, expr.length());
+      expr = expr.substring(1);
 
     primaryMatcher_ = new NdnRegexPatternListMatcher
       (expr, primaryBackrefManager_);

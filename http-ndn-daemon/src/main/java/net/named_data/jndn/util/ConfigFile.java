@@ -142,6 +142,6 @@ public class ConfigFile {
     }
   }
 
-  private String path_;
+  private final String path_;
   private final HashMap<String, String> config_ = new HashMap<String, String>();
 }

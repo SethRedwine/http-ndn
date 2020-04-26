@@ -144,7 +144,7 @@ public class CertificateCacheV2 {
 
     for (Object key : certificatesByName_.navigableKeySet().tailSet(firstKey)) {
       CertificateV2 certificate = ((Entry)certificatesByName_.get
-        ((Name)key)).certificate_;
+        (key)).certificate_;
       if (!interest.getName().isPrefixOf(certificate.getName()))
         break;
 
@@ -214,9 +214,9 @@ public class CertificateCacheV2 {
 
     public final CertificateV2 certificate_;
     public final double removalTime_;
-  };
+  }
 
-  /**
+    /**
    * Remove all outdated certificate entries.
    */
   private void
@@ -256,6 +256,6 @@ public class CertificateCacheV2 {
   private double nowOffsetMilliseconds_ = 0;
 
   // This is to force an import of net.named_data.jndn.util.
-  private static Common dummyCommon_ = new Common();
+  private static final Common dummyCommon_ = new Common();
 }
 

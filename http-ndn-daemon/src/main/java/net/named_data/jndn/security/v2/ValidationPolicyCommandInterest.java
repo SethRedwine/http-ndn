@@ -235,9 +235,9 @@ public class ValidationPolicyCommandInterest extends ValidationPolicy {
     public Name keyName_;
     public double timestamp_;
     public double lastRefreshed_;
-  };
+  }
 
-  private void
+    private void
   cleanUp()
   {
     // nowOffsetMilliseconds_ is only used for testing.
@@ -276,11 +276,8 @@ public class ValidationPolicyCommandInterest extends ValidationPolicy {
     timestamp[0] = name.get(CommandInterestSigner.POS_TIMESTAMP).toNumber();
 
     keyLocatorName[0] = getKeyLocatorName(interest, state);
-    if (state.isOutcomeFailed())
       // Already failed.
-      return false;
-
-    return true;
+      return !state.isOutcomeFailed();
   }
 
   /**
@@ -361,5 +358,5 @@ public class ValidationPolicyCommandInterest extends ValidationPolicy {
     new ArrayList<LastTimestampRecord>();
   private double nowOffsetMilliseconds_ = 0;
   // This is to force an import of net.named_data.jndn.util.
-  private static Common dummyCommon_ = new Common();
+  private static final Common dummyCommon_ = new Common();
 }

@@ -21,6 +21,7 @@
 package net.named_data.jndn.sync;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -123,13 +124,8 @@ public class DigestTree {
       byte[] sequenceDigest = sha256.digest();
 
       sha256.reset();
-      try {
-        sha256.update(dataPrefix_.getBytes("UTF-8"));
-      } catch (UnsupportedEncodingException ex) {
-        // We don't expect this to happen.
-        throw new Error("UTF-8 encoder not supported: " + ex.getMessage());
-      }
-      byte[] nameDigest = sha256.digest();
+        sha256.update(dataPrefix_.getBytes(StandardCharsets.UTF_8));
+        byte[] nameDigest = sha256.digest();
 
       sha256.reset();
       sha256.update(nameDigest);
@@ -282,5 +278,5 @@ public class DigestTree {
   private final ArrayList<DigestTree.Node> digestNode_ = new ArrayList<DigestTree.Node>();
   private String root_;
   // This is to force an import of net.named_data.jndn.util.
-  private static Common dummyCommon_ = new Common();
+  private static final Common dummyCommon_ = new Common();
 }

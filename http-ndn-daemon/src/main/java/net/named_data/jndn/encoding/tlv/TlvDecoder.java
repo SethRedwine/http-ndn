@@ -442,5 +442,5 @@ public class TlvDecoder {
 
   private final ByteBuffer input_;
   // This is to force an import of net.named_data.jndn.util.
-  private static Common dummyCommon_ = new Common();
+  private static final Common dummyCommon_ = new Common();
 }

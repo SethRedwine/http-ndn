@@ -36,5 +36,5 @@ public class Tlv0_1_1WireFormat extends Tlv0_2WireFormat {
     return instance_;
   }
 
-  private static Tlv0_1_1WireFormat instance_ = new Tlv0_1_1WireFormat();
+  private static final Tlv0_1_1WireFormat instance_ = new Tlv0_1_1WireFormat();
 }

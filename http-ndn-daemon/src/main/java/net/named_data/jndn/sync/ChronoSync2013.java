@@ -541,11 +541,8 @@ public class ChronoSync2013 implements OnInterestCallback, OnData, OnTimeout {
     }
     else {
       update(content);
-      if (interest.getName().size() == applicationBroadcastPrefix_.size() + 2)
         // Assume this is a recovery interest.
-        isRecovery = true;
-      else
-        isRecovery = false;
+        isRecovery = interest.getName().size() == applicationBroadcastPrefix_.size() + 2;
     }
 
     // Send the interests to fetch the application data.
@@ -703,7 +700,7 @@ public class ChronoSync2013 implements OnInterestCallback, OnData, OnTimeout {
             (syncState.getName(), syncState.getSeqno().getSession()) != -1) {
           int n = -1;
           for (int k = 0; k < nameList.size(); ++k) {
-            if (((String)nameList.get(k)).equals(syncState.getName())) {
+            if (nameList.get(k).equals(syncState.getName())) {
               n = k;
               break;
             }
@@ -727,8 +724,8 @@ public class ChronoSync2013 implements OnInterestCallback, OnData, OnTimeout {
       builder.addSsBuilder()
         .setName((String)nameList.get(i))
         .setType(SyncStateProto.SyncState.ActionType.UPDATE)
-        .getSeqnoBuilder().setSeq((long)(Long)sequenceNoList.get(i))
-                          .setSession((long)(Long)sessionNoList.get(i));
+        .getSeqnoBuilder().setSeq((Long)sequenceNoList.get(i))
+                          .setSession((Long)sessionNoList.get(i));
     }
     SyncStateProto.SyncStateMsg tempContent = builder.build();
 

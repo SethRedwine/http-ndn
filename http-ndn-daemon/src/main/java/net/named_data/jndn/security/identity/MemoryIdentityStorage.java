@@ -427,9 +427,9 @@ public class MemoryIdentityStorage extends IdentityStorage {
     Name getDefaultKey(){ return defaultKey_; }
 
     private Name defaultKey_;
-  };
+  }
 
-  private static class KeyRecord {
+    private static class KeyRecord {
     public KeyRecord(KeyType keyType, Blob keyDer)
     {
       keyType_ = keyType;
@@ -447,12 +447,12 @@ public class MemoryIdentityStorage extends IdentityStorage {
 
     Name getDefaultCertificate(){ return defaultCertificate_; }
 
-    private KeyType keyType_;
-    private Blob keyDer_;
+    private final KeyType keyType_;
+    private final Blob keyDer_;
     private Name defaultCertificate_;
-  };
+  }
 
- // Use HashMap without generics so it works with older Java compilers.
+    // Use HashMap without generics so it works with older Java compilers.
   private final HashMap identityStore_ =
     new HashMap(); /**< The map key is the identityName.toUri(). The value is an IdentityRecord. */
   private String defaultIdentity_ =

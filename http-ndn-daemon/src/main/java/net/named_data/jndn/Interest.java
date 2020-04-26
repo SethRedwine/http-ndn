@@ -42,7 +42,7 @@ public class Interest implements ChangeCountable {
   /**
    * Create a new Interest with the given name and interest lifetime and "none"
    * for other values.
-   * 
+   *
    * @param name                         The name for the interest.
    * @param interestLifetimeMilliseconds The interest lifetime in milliseconds, or
    *                                     -1 for none.
@@ -55,7 +55,7 @@ public class Interest implements ChangeCountable {
 
   /**
    * Create a new Interest with the given name and "none" for other values.
-   * 
+   *
    * @param name The name for the interest.
    */
   public Interest(Name name) {
@@ -66,7 +66,7 @@ public class Interest implements ChangeCountable {
   /**
    * Create a new Interest with a Name from the given URI string, and "none" for
    * other values.
-   * 
+   *
    * @param uri The URI string.
    */
   public Interest(String uri) {
@@ -75,7 +75,7 @@ public class Interest implements ChangeCountable {
 
   /**
    * Create a new interest as a deep copy of the given interest.
-   * 
+   *
    * @param interest The interest to copy.
    */
   public Interest(Interest interest) {
@@ -114,7 +114,7 @@ public class Interest implements ChangeCountable {
   /**
    * Get the default value of the CanBePrefix flag used in the Interest
    * constructor. You can change this with setDefaultCanBePrefix().
-   * 
+   *
    * @return The default value of the CanBePrefix flag.
    */
   public static boolean getDefaultCanBePrefix() {
@@ -129,7 +129,7 @@ public class Interest implements ChangeCountable {
    * setCanBePrefix() after creating the Interest. Otherwise wireEncode will print
    * a warning message. This is to avoid breaking any code when the library
    * default for CanBePrefix is changed at a later date.
-   * 
+   *
    * @param defaultCanBePrefix The default value of the CanBePrefix flag.
    */
   public static void setDefaultCanBePrefix(boolean defaultCanBePrefix) {
@@ -141,7 +141,7 @@ public class Interest implements ChangeCountable {
    * Encode this Interest for a particular wire format. If wireFormat is the
    * default wire format, also set the defaultWireEncoding field to the encoded
    * result.
-   * 
+   *
    * @param wireFormat A WireFormat object used to encode this Interest.
    * @return The encoded buffer.
    */
@@ -167,7 +167,7 @@ public class Interest implements ChangeCountable {
   /**
    * Encode this Interest for the default wire format
    * WireFormat.getDefaultWireFormat().
-   * 
+   *
    * @return The encoded buffer.
    */
   public final SignedBlob wireEncode() {
@@ -176,7 +176,7 @@ public class Interest implements ChangeCountable {
 
   /**
    * Decode the input using a particular wire format and update this Interest.
-   * 
+   *
    * @param input      The input buffer to decode. This reads from position() to
    *                   limit(), but does not change the position.
    * @param wireFormat A WireFormat object used to decode the input.
@@ -202,7 +202,7 @@ public class Interest implements ChangeCountable {
   /**
    * Decode the input using the default wire format
    * WireFormat.getDefaultWireFormat() and update this Interest.
-   * 
+   *
    * @param input The input buffer to decode. This reads from position() to
    *              limit(), but does not change the position.
    * @throws EncodingException For invalid encoding.
@@ -215,7 +215,7 @@ public class Interest implements ChangeCountable {
    * Decode the input using a particular wire format and update this Interest. If
    * wireFormat is the default wire format, also set the defaultWireEncoding field
    * another pointer to the input Blob.
-   * 
+   *
    * @param input      The input blob to decode.
    * @param wireFormat A WireFormat object used to decode the input.
    * @throws EncodingException For invalid encoding.
@@ -227,7 +227,7 @@ public class Interest implements ChangeCountable {
   /**
    * Decode the input using the default wire format
    * WireFormat.getDefaultWireFormat() and update this Interest.
-   * 
+   *
    * @param input The input blob to decode.
    * @throws EncodingException For invalid encoding.
    */
@@ -239,7 +239,7 @@ public class Interest implements ChangeCountable {
    * Encode the name according to the "NDN URI Scheme". If there are interest
    * selectors, append "?" and added the selectors as a query string. For example
    * "/test/name?ndn.ChildSelector=1".
-   * 
+   *
    * @return The URI string.
    * @note This is an experimental feature. See the API docs for more detail at
    *       http://named-data.net/doc/ndn-ccl-api/interest.html#interest-touri-method
@@ -256,7 +256,7 @@ public class Interest implements ChangeCountable {
       selectors.append("&ndn.ChildSelector=").append(childSelector_);
     selectors.append("&ndn.MustBeFresh=").append(mustBeFresh_ ? 1 : 0);
     if (interestLifetimeMilliseconds_ >= 0)
-      selectors.append("&ndn.InterestLifetime=").append((long) Math.round(interestLifetimeMilliseconds_));
+      selectors.append("&ndn.InterestLifetime=").append(Math.round(interestLifetimeMilliseconds_));
     if (nonce_.size() > 0) {
       selectors.append("&ndn.Nonce=");
       Name.toEscapedString(nonce_.buf(), selectors);
@@ -290,7 +290,7 @@ public class Interest implements ChangeCountable {
   /**
    * Get the CanBePrefix flag. If not specified, the default is true, or the value
    * from setDefaultCanBePrefix().
-   * 
+   *
    * @return The CanBePrefix flag.
    */
   public final boolean getCanBePrefix() {
@@ -313,7 +313,7 @@ public class Interest implements ChangeCountable {
 
   /**
    * Get the must be fresh flag. If not specified, the default is false.
-   * 
+   *
    * @return The must be fresh flag.
    */
   public final boolean getMustBeFresh() {
@@ -327,7 +327,7 @@ public class Interest implements ChangeCountable {
   /**
    * Return the nonce value from the incoming interest. If you change any of the
    * fields in this Interest object, then the nonce value is cleared.
-   * 
+   *
    * @return The nonce.
    */
   public final Blob getNonce() {
@@ -343,7 +343,7 @@ public class Interest implements ChangeCountable {
   /**
    * Get the forwarding hint object which you can modify to add or remove
    * forwarding hints.
-   * 
+   *
    * @return The forwarding hint as a DelegationSet.
    */
   public final DelegationSet getForwardingHint() {
@@ -352,7 +352,7 @@ public class Interest implements ChangeCountable {
 
   /**
    * Check if the application parameters are specified.
-   * 
+   *
    * @return True if the application parameters are specified, false if not.
    */
   public final boolean hasApplicationParameters() {
@@ -368,7 +368,7 @@ public class Interest implements ChangeCountable {
 
   /**
    * Get the application parameters.
-   * 
+   *
    * @return The parameters as a Blob, which isNull() if unspecified.
    */
   public final Blob getApplicationParameters() {
@@ -385,7 +385,7 @@ public class Interest implements ChangeCountable {
   /**
    * Check if this interest has a link object (or a link wire encoding which can
    * be decoded to make the link object).
-   * 
+   *
    * @return True if this interest has a link object, false if not.
    * @deprecated Use getForwardingHint.
    */
@@ -395,7 +395,7 @@ public class Interest implements ChangeCountable {
 
   /**
    * Get the link object. If necessary, decode it from the link wire encoding.
-   * 
+   *
    * @return The link object, or null if not specified.
    * @throws EncodingException For error decoding the link wire encoding (if
    *                           necessary).
@@ -422,7 +422,7 @@ public class Interest implements ChangeCountable {
   /**
    * Get the wire encoding of the link object. If there is already a wire encoding
    * then return it. Otherwise encode from the link object (if available).
-   * 
+   *
    * @param wireFormat The desired wire format for the encoding.
    * @return The wire encoding, or an isNull Blob if the link is not specified.
    * @throws EncodingException for error encoding the link object.
@@ -442,7 +442,7 @@ public class Interest implements ChangeCountable {
   /**
    * Get the wire encoding of the link object. If there is already a wire encoding
    * then return it. Otherwise encode from the link object (if available).
-   * 
+   *
    * @return The wire encoding, or an isNull Blob if the link is not specified.
    * @throws EncodingException for error encoding the link object.
    * @deprecated Use getForwardingHint.
@@ -453,7 +453,7 @@ public class Interest implements ChangeCountable {
 
   /**
    * Get the selected delegation index.
-   * 
+   *
    * @return The selected delegation index. If not specified, return -1.
    * @deprecated Use getForwardingHint.
    */
@@ -463,7 +463,7 @@ public class Interest implements ChangeCountable {
 
   /**
    * Get the incoming face ID according to the incoming packet header.
-   * 
+   *
    * @return The incoming face ID. If not specified, return -1.
    */
   public final long getIncomingFaceId() {
@@ -473,7 +473,7 @@ public class Interest implements ChangeCountable {
 
   /**
    * Set the interest name.
-   * 
+   *
    * @note You can also call getName and change the name values directly.
    * @param name The interest name. This makes a copy of the name.
    * @return This Interest so that you can chain calls to update values.
@@ -486,7 +486,7 @@ public class Interest implements ChangeCountable {
 
   /**
    * Set the min suffix components count.
-   * 
+   *
    * @param minSuffixComponents The min suffix components count. If not specified,
    *                            set to -1.
    * @return This Interest so that you can chain calls to update values.
@@ -499,7 +499,7 @@ public class Interest implements ChangeCountable {
 
   /**
    * Set the max suffix components count.
-   * 
+   *
    * @param maxSuffixComponents The max suffix components count. If not specified,
    *                            set to -1.
    * @return This Interest so that you can chain calls to update values.
@@ -512,7 +512,7 @@ public class Interest implements ChangeCountable {
 
   /**
    * Set the CanBePrefix flag.
-   * 
+   *
    * @param canBePrefix True if the Interest name can be a prefix.
    * @return This Interest so that you can chain calls to update values.
    */
@@ -527,7 +527,7 @@ public class Interest implements ChangeCountable {
 
   /**
    * Set the child selector.
-   * 
+   *
    * @param childSelector The child selector. If not specified, set to -1.
    * @return This Interest so that you can chain calls to update values.
    */
@@ -539,7 +539,7 @@ public class Interest implements ChangeCountable {
 
   /**
    * Set the MustBeFresh flag.
-   * 
+   *
    * @param mustBeFresh True if the content must be fresh, otherwise false. If you
    *                    do not set this flag, the default value is false.
    * @return This Interest so that you can chain calls to update values.
@@ -552,7 +552,7 @@ public class Interest implements ChangeCountable {
 
   /**
    * Set the interest lifetime.
-   * 
+   *
    * @param interestLifetimeMilliseconds The interest lifetime in milliseconds. If
    *                                     not specified, set to -1.
    * @return This Interest so that you can chain calls to update values.
@@ -578,7 +578,7 @@ public class Interest implements ChangeCountable {
 
   /**
    * Set this interest to use a copy of the given KeyLocator object.
-   * 
+   *
    * @note You can also call getKeyLocator and change the key locator directly.
    * @param keyLocator The KeyLocator object. This makes a copy of the object. If
    *                   no key locator is specified, set to a new default
@@ -593,7 +593,7 @@ public class Interest implements ChangeCountable {
 
   /**
    * Set this interest to use a copy of the given Exclude object.
-   * 
+   *
    * @note You can also call getExclude and change the exclude entries directly.
    * @param exclude The Exclude object. This makes a copy of the object. If no
    *                exclude is specified, set to a new default Exclude(), or to an
@@ -609,7 +609,7 @@ public class Interest implements ChangeCountable {
   /**
    * Set this interest to use a copy of the given DelegationSet object as the
    * forwarding hint.
-   * 
+   *
    * @note You can also call getForwardingHint and change the forwarding hint
    *       directly.
    * @param forwardingHint The DelegationSet object to use as the forwarding hint.
@@ -626,7 +626,7 @@ public class Interest implements ChangeCountable {
 
   /**
    * Set the application parameters to the given value.
-   * 
+   *
    * @param applicationParameters The application parameters Blob.
    * @return This Interest so that you can chain calls to update values.
    */
@@ -648,7 +648,7 @@ public class Interest implements ChangeCountable {
    * ParametersSha256DigestComponent. However, if the application parameters is
    * unspecified, do nothing. This does not check if the Name already has a
    * parameters digest component, so calling again will append another component.
-   * 
+   *
    * @return This Interest so that you can chain calls to update values.
    */
   public final Interest appendParametersDigestToName() {
@@ -669,7 +669,7 @@ public class Interest implements ChangeCountable {
    * Set the link wire encoding bytes, without decoding them. If there is a link
    * object, set it to null. If you later call getLink(), it will decode the
    * wireEncoding to create the link object.
-   * 
+   *
    * @param encoding   The buffer with the bytes of the link wire encoding. If no
    *                   link is specified, set to an empty Blob() or call
    *                   unsetLink().
@@ -693,7 +693,7 @@ public class Interest implements ChangeCountable {
    * Set the link wire encoding bytes, without decoding them. If there is a link
    * object, set it to null. IF you later call getLink(), it will decode the
    * wireEncoding to create the link object.
-   * 
+   *
    * @param encoding The buffer with the bytes of the link wire encoding. If no
    *                 link is specified, set to an empty Blob().
    * @return This Interest so that you can chain calls to update values.
@@ -705,7 +705,7 @@ public class Interest implements ChangeCountable {
 
   /**
    * Clear the link wire encoding and link object so that getLink() returns null.
-   * 
+   *
    * @return This Interest so that you can chain calls to update values.
    * @deprecated Use setForwardingHint.
    */
@@ -715,7 +715,7 @@ public class Interest implements ChangeCountable {
 
   /**
    * Set the selected delegation index.
-   * 
+   *
    * @param selectedDelegationIndex The selected delegation index. If not
    *                                specified, set to -1.
    * @return This Interest so that you can chain calls to update values.
@@ -730,7 +730,7 @@ public class Interest implements ChangeCountable {
   /**
    * An internal library method to set the LpPacket for an incoming packet. The
    * application should not call this.
-   * 
+   *
    * @param lpPacket The LpPacket. This does not make a copy.
    * @return This Interest so that you can chain calls to update values.
    * @note This is an experimental feature. This API may change in the future.
@@ -768,7 +768,7 @@ public class Interest implements ChangeCountable {
   /**
    * Check if this Interest's name matches the given name (using Name.match) and
    * the given name also conforms to the interest selectors.
-   * 
+   *
    * @param name The name to check.
    * @return True if the name and interest selectors match, otherwise false.
    */
@@ -784,10 +784,7 @@ public class Interest implements ChangeCountable {
     // Add 1 for the implicit digest.
         !(name.size() + 1 - getName().size() <= maxSuffixComponents_))
       return false;
-    if (getExclude().size() > 0 && name.size() > getName().size() && getExclude().matches(name.get(getName().size())))
-      return false;
-
-    return true;
+      return getExclude().size() <= 0 || name.size() <= getName().size() || !getExclude().matches(name.get(getName().size()));
   }
 
   /**
@@ -796,7 +793,7 @@ public class Interest implements ChangeCountable {
    * PublisherPublicKeyLocator, and Exclude. It does not consider the
    * ChildSelector or MustBeFresh. This uses the given wireFormat to get the Data
    * packet encoding for the full Name.
-   * 
+   *
    * @param data       The Data packet to check.
    * @param wireFormat A WireFormat object used to encode the Data packet to get
    *                   its full Name.
@@ -856,8 +853,7 @@ public class Interest implements ChangeCountable {
       if (!KeyLocator.canGetFromSignature(signature))
         // No KeyLocator in the Data packet.
         return false;
-      if (!publisherPublicKeyLocator.equals(KeyLocator.getFromSignature(signature)))
-        return false;
+        return publisherPublicKeyLocator.equals(KeyLocator.getFromSignature(signature));
     }
 
     return true;
@@ -869,7 +865,7 @@ public class Interest implements ChangeCountable {
    * PublisherPublicKeyLocator, and Exclude. It does not consider the
    * ChildSelector or MustBeFresh. This uses the default WireFormat to get the
    * Data packet encoding for the full Name.
-   * 
+   *
    * @param data The Data packet to check.
    * @return True if the given Data packet can satisfy this Interest.
    */
@@ -880,7 +876,7 @@ public class Interest implements ChangeCountable {
   /**
    * Return a pointer to the defaultWireEncoding, which was encoded with
    * getDefaultWireEncodingFormat().
-   * 
+   *
    * @return The default wire encoding. Its pointer may be null.
    */
   public final SignedBlob getDefaultWireEncoding() {
@@ -896,7 +892,7 @@ public class Interest implements ChangeCountable {
 
   /**
    * Get the WireFormat which is used by getDefaultWireEncoding().
-   * 
+   *
    * @return The WireFormat, which is only meaningful if the
    *         getDefaultWireEncoding() does not have a null pointer.
    */
@@ -907,7 +903,7 @@ public class Interest implements ChangeCountable {
   /**
    * Get the change count, which is incremented each time this object (or a child
    * object) is changed.
-   * 
+   *
    * @return The change count.
    */
   public final long getChangeCount() {

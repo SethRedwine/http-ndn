@@ -176,9 +176,9 @@ public class DecryptorV2 {
       public EncryptedContent encryptedContent;
       public DecryptSuccessCallback onSuccess;
       public EncryptError.OnError onError;
-    };
+    }
 
-    public boolean isRetrieved = false;
+      public boolean isRetrieved = false;
     public Blob bits;
     public long pendingInterest = 0;
     public ArrayList<PendingDecrypt> pendingDecrypts = new ArrayList();
@@ -389,7 +389,7 @@ public class DecryptorV2 {
         "Error decrypting the CK EncryptedContent " + ex);
       return;
     }
-    
+
     if (ckBits.isNull()) {
       onError.onError(EncryptError.ErrorCode.TpmKeyNotFound,
         "Could not decrypt secret, " + kdkKeyName.toUri() + " not found in TPM");

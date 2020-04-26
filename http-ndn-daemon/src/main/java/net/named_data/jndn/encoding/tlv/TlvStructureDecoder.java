@@ -203,11 +203,11 @@ public class TlvStructureDecoder {
   public final void
   seek(int offset) { offset_ = offset; }
 
-  private static int READ_TYPE =         0;
-  private static int READ_TYPE_BYTES =   1;
-  private static int READ_LENGTH =       2;
-  private static int READ_LENGTH_BYTES = 3;
-  private static int READ_VALUE_BYTES =  4;
+  private static final int READ_TYPE =         0;
+  private static final int READ_TYPE_BYTES =   1;
+  private static final int READ_LENGTH =       2;
+  private static final int READ_LENGTH_BYTES = 3;
+  private static final int READ_VALUE_BYTES =  4;
 
   private boolean gotElementEnd_ = false;
   private int offset_ = 0;
@@ -215,7 +215,7 @@ public class TlvStructureDecoder {
   private boolean useHeaderBuffer_ = false;
   // 8 bytes is enough to hold the extended bytes in the length encoding
   // where it is an 8-byte number.
-  private ByteBuffer headerBuffer_ = ByteBuffer.allocate(8);
+  private final ByteBuffer headerBuffer_ = ByteBuffer.allocate(8);
   private int nBytesToRead_ = 0;
   private int firstOctet_;
 }

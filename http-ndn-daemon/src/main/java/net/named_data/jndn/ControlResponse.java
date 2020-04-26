@@ -168,8 +168,8 @@ public class ControlResponse {
   public final ControlResponse
   setStatusText(String statusText)
   {
-    statusText_ = statusText == null ? "" : statusText;;
-    return this;
+    statusText_ = statusText == null ? "" : statusText;
+      return this;
   }
 
   /**

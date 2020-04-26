@@ -101,10 +101,7 @@ public class Sqlite3GroupManagerDb extends Sqlite3GroupManagerDbBase {
       try {
         ResultSet result = statement.executeQuery();
 
-        if (result.next())
-          return true;
-        else
-          return false;
+          return result.next();
       } finally {
         statement.close();
       }
@@ -383,10 +380,7 @@ public class Sqlite3GroupManagerDb extends Sqlite3GroupManagerDbBase {
       try {
         ResultSet result = statement.executeQuery();
 
-        if (result.next())
-          return true;
-        else
-          return false;
+          return result.next();
       } finally {
         statement.close();
       }

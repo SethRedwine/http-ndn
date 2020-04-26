@@ -115,9 +115,7 @@ public class AndroidSqlite3IdentityStorage extends Sqlite3IdentityStorageBase {
 
     // Check if the Key table exists.
     cursor = database_.rawQuery(SELECT_MASTER_KEY_TABLE, null);
-    idTableExists = false;
-    if (cursor.moveToNext())
-      idTableExists = true;
+      idTableExists = cursor.moveToNext();
     cursor.close();
 
     if (!idTableExists) {
@@ -127,9 +125,7 @@ public class AndroidSqlite3IdentityStorage extends Sqlite3IdentityStorageBase {
 
     // Check if the Certificate table exists.
     cursor = database_.rawQuery(SELECT_MASTER_CERT_TABLE, null);
-    idTableExists = false;
-    if (cursor.moveToNext())
-      idTableExists = true;
+      idTableExists = cursor.moveToNext();
     cursor.close();
 
     if (!idTableExists) {

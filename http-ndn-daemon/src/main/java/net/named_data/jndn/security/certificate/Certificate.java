@@ -263,7 +263,7 @@ public class Certificate extends Data {
       DerSequence sd = DerNode.getSequence(subjectChildren, i);
       List descriptionChildren = sd.getChildren();
       String oidStr = (String)((DerNode)descriptionChildren.get(0)).toVal();
-      String value = "" + ((Blob)((DerNode)descriptionChildren.get(1)).toVal());
+      String value = "" + ((DerNode)descriptionChildren.get(1)).toVal();
 
       addSubjectDescription(new CertificateSubjectDescription(oidStr, value));
     }
@@ -301,9 +301,9 @@ public class Certificate extends Data {
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd'T'HHmmss");
     dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
     String notBeforeStr = dateFormat.format
-      (Common.millisecondsSince1970ToDate((long)Math.round(getNotBefore())));
+      (Common.millisecondsSince1970ToDate(Math.round(getNotBefore())));
     String notAfterStr = dateFormat.format
-      (Common.millisecondsSince1970ToDate((long)Math.round(getNotAfter())));
+      (Common.millisecondsSince1970ToDate(Math.round(getNotAfter())));
 
     s += "  NotBefore: " + notBeforeStr + "\n";
     s += "  NotAfter: " + notAfterStr + "\n";

@@ -27,6 +27,7 @@ import com.google.protobuf.Descriptors.FieldDescriptor.Type;
 import com.google.protobuf.Message;
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import net.named_data.jndn.Name;
 import net.named_data.jndn.encoding.tlv.TlvDecoder;
@@ -105,7 +106,7 @@ public class ProtobufTlv {
   {
     Name name = new Name();
     Descriptor descriptor = nameMessage.getDescriptorForType();
-    FieldDescriptor field = (FieldDescriptor)descriptor.getFields().get(0);
+    FieldDescriptor field = descriptor.getFields().get(0);
 
     for (int i = 0; i < nameMessage.getRepeatedFieldCount(field); ++i)
       name.append(new Blob
@@ -239,14 +240,9 @@ public class ProtobufTlv {
     else if (field.getType() == Type.BYTES)
       return ByteString.copyFrom(decoder.readBlobTlv(tlvType));
     else if (field.getType() == Type.STRING) {
-      try {
         ByteBuffer byteBuffer = decoder.readBlobTlv(tlvType);
         // Use Blob to get the byte array.
-        return new String(new Blob(byteBuffer, false).getImmutableArray(), "UTF-8");
-      } catch (UnsupportedEncodingException ex) {
-        // We don't expect this to happen.
-        throw new Error("UTF-8 decoder not supported: " + ex.getMessage());
-      }
+        return new String(new Blob(byteBuffer, false).getImmutableArray(), StandardCharsets.UTF_8);
     }
     else if (field.getType() == Type.BOOL)
       return decoder.readBooleanTlv(tlvType, endOffset);

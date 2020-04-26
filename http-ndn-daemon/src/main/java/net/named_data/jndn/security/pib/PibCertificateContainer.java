@@ -162,7 +162,7 @@ public class PibCertificateContainer {
   getCertificates_() { return certificates_; }
 
   private final Name keyName_;
-  private HashSet<Name> certificateNames_;
+  private final HashSet<Name> certificateNames_;
   // Cache of loaded certificates.
   private final HashMap<Name, CertificateV2> certificates_ =
     new HashMap<Name, CertificateV2>();
@@ -170,5 +170,5 @@ public class PibCertificateContainer {
   private final PibImpl pibImpl_;
 
   // This is to force an import of net.named_data.jndn.util.
-  private static Common dummyCommon_ = new Common();
+  private static final Common dummyCommon_ = new Common();
 }

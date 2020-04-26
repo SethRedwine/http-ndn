@@ -29,7 +29,7 @@ public class TlvEncoder {
   /**
    * Create a new TlvEncoder to use a DynamicByteBuffer with the initialCapacity.
    * When done, you should call getOutput().
-   * 
+   *
    * @param initialCapacity The initial capacity of buffer().
    */
   public TlvEncoder(int initialCapacity) {
@@ -52,7 +52,7 @@ public class TlvEncoder {
    * Get the number of bytes that have been written to the output. You can save
    * this number, write sub TLVs, then subtract the new length from this to get
    * the total length of the sub TLVs.
-   * 
+   *
    * @return The number of bytes that have been written to the output.
    */
   public final int getLength() {
@@ -62,7 +62,7 @@ public class TlvEncoder {
   /**
    * Encode varNumber as a VAR-NUMBER in NDN-TLV and write it to the output just
    * before getLength() from the back. Advance getLength().
-   * 
+   *
    * @param varNumber The non-negative number to encode. This is a Java 32-bit
    *                  int, so this does not support encoding a 64-bit VAR-NUMBER.
    */
@@ -89,7 +89,7 @@ public class TlvEncoder {
   /**
    * Encode the type and length as VAR-NUMBER and write to the output just before
    * getLength() from the back. Advance getLength().
-   * 
+   *
    * @param type   The type of the TLV. This is a Java 32-bit int, so this does
    *               not support encoding a 64-bit type code.
    * @param length The non-negative length of the TLV. This is a Java 32-bit int,
@@ -108,7 +108,7 @@ public class TlvEncoder {
    * Encode value as a non-negative integer and write it to the output just before
    * getLength() from the back. Advance getLength(). This does not write a type or
    * length for the value.
-   * 
+   *
    * @param value The non-negative integer to encode. This is a Java 64-bit long,
    *              so encoding of 64-bit values is supported (actually 63-bit
    *              because a Java long is signed).
@@ -149,7 +149,7 @@ public class TlvEncoder {
    * Write the type, then the length of the encoded value then encode value as a
    * non-negative integer and write it to the output just before getLength() from
    * the back. Advance getLength().
-   * 
+   *
    * @param type  The type of the TLV. This is a Java 32-bit int, so this does not
    *              support encoding a 64-bit type code.
    * @param value The non-negative integer to encode. This is a Java 64-bit long,
@@ -167,7 +167,7 @@ public class TlvEncoder {
   /**
    * If value is negative or null then do nothing, otherwise call
    * writeNonNegativeIntegerTlv.
-   * 
+   *
    * @param type  The type of the TLV. This is a Java 32-bit int, so this does not
    *              support encoding a 64-bit type code.
    * @param value If negative do nothing, otherwise the integer to encode. This is
@@ -182,14 +182,14 @@ public class TlvEncoder {
   /**
    * If value is negative or null then do nothing, otherwise call
    * writeNonNegativeIntegerTlv.
-   * 
+   *
    * @param type  The type of the TLV. This is a Java 32-bit int, so this does not
    *              support encoding a 64-bit type code.
    * @param value If negative do nothing, otherwise use (long)Math.round(value).
    */
   public final void writeOptionalNonNegativeIntegerTlvFromDouble(int type, double value) {
     if (value >= 0.0)
-      writeNonNegativeIntegerTlv(type, (long) Math.round(value));
+      writeNonNegativeIntegerTlv(type, Math.round(value));
   }
 
   /**
@@ -197,7 +197,7 @@ public class TlvEncoder {
    * getLength() from the back. Advance getLength() of the output. This does NOT
    * change buffer.position(). Note that this does not encode a type and length;
    * for that see writeBlobTlv.
-   * 
+   *
    * @param buffer The byte buffer with the bytes to write. If buffer is null,
    *               then do nothing.
    */
@@ -218,7 +218,7 @@ public class TlvEncoder {
    * Write the type, then the length of the buffer then the buffer value from its
    * position() to limit() to the output just before getLength() from the back.
    * Advance getLength() of the output. This does NOT change value.position().
-   * 
+   *
    * @param type  The type of the TLV. This is a Java 32-bit int, so this does not
    *              support encoding a 64-bit type code.
    * @param value The byte buffer with the bytes of the blob. If value is null,
@@ -238,7 +238,7 @@ public class TlvEncoder {
   /**
    * If the byte buffer value is null or value.remaining() is zero then do
    * nothing, otherwise call writeBlobTlv.
-   * 
+   *
    * @param type  The type of the TLV. This is a Java 32-bit int, so this does not
    *              support encoding a 64-bit type code.
    * @param value If null or value.remaining() is zero do nothing, otherwise the
@@ -252,7 +252,7 @@ public class TlvEncoder {
   /**
    * Return a slice of the output buffer up to the current length of the output
    * encoding.
-   * 
+   *
    * @return A ByteBuffer which shares the same underlying buffer with the output
    *         buffer.
    */

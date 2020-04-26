@@ -410,7 +410,7 @@ public class Name implements ChangeCountable, Comparable {
       long result = 0;
       for (int i = buffer.position(); i < buffer.limit(); ++i) {
         result *= 256;
-        result += (long)((int)buffer.get(i) & 0xff);
+        result += (int)buffer.get(i) & 0xff;
       }
 
       return result;
@@ -435,7 +435,7 @@ public class Name implements ChangeCountable, Comparable {
       long result = 0;
       for (int i = buffer.position() + 1; i < buffer.limit(); ++i) {
         result *= 256;
-        result += (long)((int)buffer.get(i) & 0xff);
+        result += (int)buffer.get(i) & 0xff;
       }
 
       return result;
@@ -587,7 +587,7 @@ public class Name implements ChangeCountable, Comparable {
       TlvEncoder encoder = new TlvEncoder(9);
       // Encode backwards.
       encoder.writeNonNegativeInteger(number);
-      encoder.writeNonNegativeInteger((long)marker);
+      encoder.writeNonNegativeInteger(marker);
       return new Component(new Blob(encoder.getOutput(), false));
     }
 

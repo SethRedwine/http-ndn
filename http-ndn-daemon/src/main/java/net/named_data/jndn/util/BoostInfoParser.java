@@ -263,5 +263,5 @@ public class BoostInfoParser {
     throw new Error("BoostInfoParser: input line is malformed");
   }
 
-  private BoostInfoTree root_ = new BoostInfoTree();
+  private final BoostInfoTree root_ = new BoostInfoTree();
 }

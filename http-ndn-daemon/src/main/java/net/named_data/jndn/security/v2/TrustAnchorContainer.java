@@ -166,7 +166,7 @@ public class TrustAnchorContainer {
 
     for (Object key : anchors_.anchorsByName_.navigableKeySet().tailSet(firstKey)) {
       CertificateV2 certificate = (CertificateV2)anchors_.anchorsByName_.get
-        ((Name)key);
+        (key);
       if (!interest.getName().isPrefixOf(certificate.getName()))
         break;
 
@@ -245,9 +245,9 @@ public class TrustAnchorContainer {
     size() { return anchorsByName_.size(); }
 
     public final TreeMap anchorsByName_ = new TreeMap();
-  };
+  }
 
-  private void
+    private void
   refresh()
   {
     for (TrustAnchorGroup group : groups_.values())
@@ -258,5 +258,5 @@ public class TrustAnchorContainer {
     new HashMap<String, TrustAnchorGroup>();
   private final AnchorContainer anchors_ = new AnchorContainer();
   // This is to force an import of net.named_data.jndn.util.
-  private static Common dummyCommon_ = new Common();
+  private static final Common dummyCommon_ = new Common();
 }

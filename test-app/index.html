@@ -19,11 +19,123 @@
                 el.innerHTML = data;
             });
         };
+        testHead = function () {
+            console.log("Calling...");
+            fetch("http://127.0.0.1:9999/test-head", {
+                method: 'HEAD'
+            }).then((resp) => {
+                return resp.json();
+            }, (e) => {
+                console.log("=== BAD ===\n", e);
+            }).then((data) => {
+                console.log(data);
+                const el = document.getElementById("response-text");
+                el.innerHTML = data;
+            });
+        };
+        testGoogleGet = function () {
+            console.log("Calling...");
+            fetch("http://www.google.com").then((resp) => {
+                return resp.json();
+            }, (e) => {
+                console.log("=== BAD ===\n", e);
+                return e;
+            }).then((data) => {
+                console.log(data);
+                const el = document.getElementById("response-text");
+                el.innerHTML = data;
+            });
+        };
+        testPost = function () {
+            console.log("Calling...");
+            fetch("http://127.0.0.1:9999/test-post", {
+                method: 'POST',
+                // body: JSON.stringify({data: "some string"})
+                body: "data=definitelyHere&moreData=thatToo"
+            }).then((resp) => {
+                return resp.json();
+            }, (e) => {
+                console.log("=== BAD ===\n", e);
+                return e;
+            }).then((data) => {
+                console.log(data);
+                const el = document.getElementById("response-text");
+                el.innerHTML = data;
+            });
+        };
+        testLottaPosts = function () {
+            console.log("Calling...");
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    fetch("http://127.0.0.1:9999/test-post", {
+                        method: 'POST',
+                        body: "count=" + i.toString()
+                    }).then((resp) => {
+                        return resp.json();
+                    }, (e) => {
+                        console.log("=== BAD ===\n", e);
+                        return e;
+                    }).then((data) => {
+                        console.log(data);
+                        const el = document.getElementById("response-text");
+                        el.innerHTML += "<br>" + data;
+                    });
+                }, i * 50);
+            }
+        };
+        testAllWith = function () {
+            console.log("Calling...");
+            const methods = ["POST", "OPTIONS", "PUT", "DELETE"]
+            for (const method of methods) {
+                setTimeout(() => {
+                    fetch("http://127.0.0.1:9999/test-" + method.toLowerCase(), {
+                        method: method,
+                        body: "method=" + method
+                    }).then((resp) => {
+                        return resp.json();
+                    }, (e) => {
+                        console.log("=== BAD ===\n", e);
+                        return e;
+                    }).then((data) => {
+                        console.log(data);
+                        const el = document.getElementById("response-text");
+                        el.innerHTML += "<br>" + data;
+                    });
+                }, 50);
+            }
+        };
+        testAllWithout = function () {
+            console.log("Calling...");
+            const methods = ["GET", "POST", "HEAD", "OPTIONS", "PUT", "DELETE"]
+            for (const method of methods) {
+                setTimeout(() => {
+                    fetch("http://127.0.0.1:9999/test-" + method.toLowerCase(), {
+                        method: method,
+                    }).then((resp) => {
+                        return resp.json();
+                    }, (e) => {
+                        console.log("=== BAD ===\n", e);
+                        return e;
+                    }).then((data) => {
+                        console.log(data);
+                        const el = document.getElementById("response-text");
+                        el.innerHTML += "<br>" + data;
+                    });
+                }, 50);
+            }
+        };
     </script>
     <h3>
         Test page
     </h3>
     <button onclick="testGet()">Test Get</button>
+    <button onclick="testHead()">Test Head</button>
+    <!-- <button onclick="testGoogleGet()">Test google get</button> -->
+    <button onclick="testPost()">Test Post</button>
+    <button onclick="testLottaPosts()">Test 50 Posts</button>
+    <br>
+    <button onclick="testAllWith()">Test all valid methods w/ body</button>
+    <button onclick="testAllWithout()">Test all valid methods w/o body</button>
     <div>Response:</div>
     <br>
     <div id="response-text"></div>

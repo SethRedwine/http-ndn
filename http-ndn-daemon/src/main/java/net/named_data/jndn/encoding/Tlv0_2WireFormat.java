@@ -61,7 +61,7 @@ import net.named_data.jndn.util.Blob;
 public class Tlv0_2WireFormat extends WireFormat {
   /**
    * Encode name in NDN-TLV and return the encoding.
-   * 
+   *
    * @param name The Name object to encode.
    * @return A Blob containing the encoding.
    */
@@ -73,7 +73,7 @@ public class Tlv0_2WireFormat extends WireFormat {
 
   /**
    * Decode input as a name in NDN-TLV and set the fields of the Name object.
-   * 
+   *
    * @param name  The Name object whose fields are updated.
    * @param input The input buffer to decode. This reads from position() to
    *              limit(), but does not change the position.
@@ -89,7 +89,7 @@ public class Tlv0_2WireFormat extends WireFormat {
 
   /**
    * Encode interest using NDN-TLV and return the encoding.
-   * 
+   *
    * @param interest                 The Interest object to encode.
    * @param signedPortionBeginOffset Return the offset in the encoding of the
    *                                 beginning of the signed portion. The signed
@@ -210,7 +210,7 @@ public class Tlv0_2WireFormat extends WireFormat {
   /**
    * Decode input as an interest in NDN-TLV and set the fields of the interest
    * object.
-   * 
+   *
    * @param interest                 The Interest object whose fields are updated.
    * @param input                    The input buffer to decode. This reads from
    *                                 position() to limit(), but does not change
@@ -305,7 +305,7 @@ public class Tlv0_2WireFormat extends WireFormat {
 
   /**
    * Encode data in NDN-TLV and return the encoding.
-   * 
+   *
    * @param data                     The Data object to encode.
    * @param signedPortionBeginOffset Return the offset in the encoding of the
    *                                 beginning of the signed portion by setting
@@ -345,7 +345,7 @@ public class Tlv0_2WireFormat extends WireFormat {
   /**
    * Decode input as a data packet in NDN-TLV and set the fields in the data
    * object.
-   * 
+   *
    * @param data                     The Data object whose fields are updated.
    * @param input                    The input buffer to decode. This reads from
    *                                 position() to limit(), but does not change
@@ -391,7 +391,7 @@ public class Tlv0_2WireFormat extends WireFormat {
 
   /**
    * Encode controlParameters in NDN-TLV and return the encoding.
-   * 
+   *
    * @param controlParameters The ControlParameters object to encode.
    * @return A Blob containing the encoding.
    */
@@ -404,7 +404,7 @@ public class Tlv0_2WireFormat extends WireFormat {
   /**
    * Decode input as a control parameters in NDN-TLV and set the fields of the
    * controlParameters object.
-   * 
+   *
    * @param controlParameters The ControlParameters object whose fields are
    *                          updated.
    * @param input             The input buffer to decode. This reads from
@@ -424,7 +424,7 @@ public class Tlv0_2WireFormat extends WireFormat {
 
   /**
    * Encode controlResponse in NDN-TLV and return the encoding.
-   * 
+   *
    * @param controlResponse The ControlResponse object to encode.
    * @return A Blob containing the encoding.
    */
@@ -449,7 +449,7 @@ public class Tlv0_2WireFormat extends WireFormat {
   /**
    * Decode input as a control parameters in NDN-TLV and set the fields of the
    * controlResponse object.
-   * 
+   *
    * @param controlResponse The ControlResponse object whose fields are updated.
    * @param input           The input buffer to decode. This reads from position()
    *                        to limit(), but does not change the position.
@@ -484,7 +484,7 @@ public class Tlv0_2WireFormat extends WireFormat {
 
   /**
    * Encode signature as a SignatureInfo in NDN-TLV and return the encoding.
-   * 
+   *
    * @param signature An object of a subclass of Signature to encode.
    * @return A Blob containing the encoding.
    */
@@ -512,7 +512,7 @@ public class Tlv0_2WireFormat extends WireFormat {
    * Decode signatureInfo as an NDN-TLV signature info and signatureValue as the
    * related NDN-TLV SignatureValue, and return a new object which is a subclass
    * of Signature.
-   * 
+   *
    * @param signatureInfo  The signature info input buffer to decode. This reads
    *                       from position() to limit(), but does not change the
    *                       position.
@@ -542,7 +542,7 @@ public class Tlv0_2WireFormat extends WireFormat {
   /**
    * Encode the signatureValue in the Signature object as a SignatureValue (the
    * signature bits) in NDN-TLV and return the encoding.
-   * 
+   *
    * @param signature An object of a subclass of Signature with the signature
    *                  value to encode.
    * @return A Blob containing the encoding.
@@ -557,7 +557,7 @@ public class Tlv0_2WireFormat extends WireFormat {
   /**
    * Decode input as an NDN-TLV LpPacket and set the fields of the lpPacket
    * object.
-   * 
+   *
    * @param lpPacket The LpPacket object whose fields are updated.
    * @param input    The input buffer to decode. This reads from position() to
    *                 limit(), but does not change the position.
@@ -638,7 +638,7 @@ public class Tlv0_2WireFormat extends WireFormat {
    * encoding. Note that the sequence of Delegation does not have an outer TLV
    * type and length because it is intended to use the type and length of a Data
    * packet's Content.
-   * 
+   *
    * @param delegationSet The DelegationSet object to encode.
    * @return A Blob containing the encoding.
    */
@@ -655,7 +655,7 @@ public class Tlv0_2WireFormat extends WireFormat {
    * outer TLV type and length because it is intended to use the type and length
    * of a Data packet's Content. This ignores any elements after the sequence of
    * Delegation and before input.limit().
-   * 
+   *
    * @param delegationSet The DelegationSet object whose fields are updated.
    * @param input         The input buffer to decode. This reads from position()
    *                      to limit(), but does not change the position.
@@ -673,7 +673,7 @@ public class Tlv0_2WireFormat extends WireFormat {
 
   /**
    * Encode the EncryptedContent v1 in NDN-TLV and return the encoding.
-   * 
+   *
    * @param encryptedContent The EncryptedContent object to encode.
    * @return A Blob containing the encoding.
    */
@@ -697,7 +697,7 @@ public class Tlv0_2WireFormat extends WireFormat {
   /**
    * Decode input as a EncryptedContent v1 in NDN-TLV and set the fields of the
    * encryptedContent object.
-   * 
+   *
    * @param encryptedContent The EncryptedContent object whose fields are updated.
    * @param input            The input buffer to decode. This reads from
    *                         position() to limit(), but does not change the
@@ -740,7 +740,7 @@ public class Tlv0_2WireFormat extends WireFormat {
    * NDN-TLV and return the encoding. See
    * https://github.com/named-data/name-based-access-control/blob/new/docs/spec.rst
    * .
-   * 
+   *
    * @param encryptedContent The EncryptedContent object to encode.
    * @return A Blob containing the encoding.
    */
@@ -765,7 +765,7 @@ public class Tlv0_2WireFormat extends WireFormat {
    * in NDN-TLV and set the fields of the encryptedContent object. See
    * https://github.com/named-data/name-based-access-control/blob/new/docs/spec.rst
    * .
-   * 
+   *
    * @param encryptedContent The EncryptedContent object whose fields are updated.
    * @param input            The input buffer to decode. This reads from
    *                         position() to limit(), but does not change the
@@ -799,7 +799,7 @@ public class Tlv0_2WireFormat extends WireFormat {
   /**
    * Get a singleton instance of a Tlv0_2WireFormat. To always use the preferred
    * version NDN-TLV, you should use TlvWireFormat.get().
-   * 
+   *
    * @return The singleton instance.
    */
   public static Tlv0_2WireFormat get() {
@@ -809,7 +809,7 @@ public class Tlv0_2WireFormat extends WireFormat {
   /**
    * Encode the name component to the encoder as NDN-TLV. This handles different
    * component types such as ImplicitSha256DigestComponent.
-   * 
+   *
    * @param component The name component to encode.
    * @param encoder   The TlvEncoder to receive the encoding.
    */
@@ -827,7 +827,7 @@ public class Tlv0_2WireFormat extends WireFormat {
   /**
    * Decode the name component as NDN-TLV and return the component. This handles
    * different component types such as ImplicitSha256DigestComponent.
-   * 
+   *
    * @param decoder The decoder with the input to decode.
    * @param copy    If true, copy from the input when making new Blob values. If
    *                false, then Blob values share memory with the input, which
@@ -855,7 +855,7 @@ public class Tlv0_2WireFormat extends WireFormat {
 
   /**
    * Encode the name as NDN-TLV to the encoder.
-   * 
+   *
    * @param name                     The name to encode.
    * @param signedPortionBeginOffset Return the offset in the encoding of the
    *                                 beginning of the signed portion. The signed
@@ -897,7 +897,7 @@ public class Tlv0_2WireFormat extends WireFormat {
 
   /**
    * Decode the name as NDN-TLV and set the fields in name.
-   * 
+   *
    * @param name                     The name object whose fields are set.
    * @param signedPortionBeginOffset Return the offset in the encoding of the
    *                                 beginning of the signed portion. The signed
@@ -1093,7 +1093,7 @@ public class Tlv0_2WireFormat extends WireFormat {
   /**
    * An internal method to encode signature as the appropriate form of
    * SignatureInfo in NDN-TLV.
-   * 
+   *
    * @param signature An object of a subclass of Signature to encode.
    * @param encoder   The TlvEncoder to receive the encoding.
    */
@@ -1351,7 +1351,7 @@ public class Tlv0_2WireFormat extends WireFormat {
    * that the sequence of Delegation does not have an outer TLV type and length
    * because (when used in a Link object) it is intended to use the type and
    * length of a Data packet's Content.
-   * 
+   *
    * @param delegationSet The DelegationSet object to encode.
    * @param encoder       The TlvEncoder to receive the encoding.
    */
@@ -1372,7 +1372,7 @@ public class Tlv0_2WireFormat extends WireFormat {
    * delegationSet object. Note that the sequence of Delegation does not have an
    * outer TLV type and length because (when used in a Link object) it is intended
    * to use the type and length of a Data packet's Content.
-   * 
+   *
    * @param delegationSet The DelegationSet object whose fields are updated.
    * @param endOffset     Decode elements up to endOffset in the input. This does
    *                      not call finishNestedTlvs.
@@ -1399,7 +1399,7 @@ public class Tlv0_2WireFormat extends WireFormat {
 
   /**
    * Encode interest in NDN-TLV format v0.3 and return the encoding.
-   * 
+   *
    * @param interest                 The Interest object to encode.
    * @param signedPortionBeginOffset Return the offset in the encoding of the
    *                                 beginning of the signed portion. The signed
@@ -1492,7 +1492,7 @@ public class Tlv0_2WireFormat extends WireFormat {
    * Interest object. This private method is called if the main decodeInterest
    * fails to decode as v0.2. This ignores HopLimit and interprets CanBePrefix
    * using MaxSuffixComponents.
-   * 
+   *
    * @param interest                 The Interest object whose fields are updated.
    * @param input                    The input buffer to decode. This reads from
    *                                 position() to limit(), but does not change
@@ -1561,6 +1561,6 @@ public class Tlv0_2WireFormat extends WireFormat {
   }
 
   private static final Random random_ = new Random();
-  private static Tlv0_2WireFormat instance_ = new Tlv0_2WireFormat();
+  private static final Tlv0_2WireFormat instance_ = new Tlv0_2WireFormat();
   private static boolean didCanBePrefixWarning_ = false;
 }

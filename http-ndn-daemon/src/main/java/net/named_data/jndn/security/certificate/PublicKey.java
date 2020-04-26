@@ -235,8 +235,8 @@ public class PublicKey {
     return encrypt(plainData.getImmutableArray(), algorithmType);
   }
 
-  private static String RSA_ENCRYPTION_OID = "1.2.840.113549.1.1.1";
-  private static String EC_ENCRYPTION_OID = "1.2.840.10045.2.1";
+  private static final String RSA_ENCRYPTION_OID = "1.2.840.113549.1.1.1";
+  private static final String EC_ENCRYPTION_OID = "1.2.840.10045.2.1";
 
   private final KeyType keyType_;
   private final Blob keyDer_;   /**< PublicKeyInfo in DER */

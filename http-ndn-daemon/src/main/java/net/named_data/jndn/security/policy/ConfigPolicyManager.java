@@ -821,9 +821,9 @@ public class ConfigPolicyManager extends PolicyManager {
       ArrayList certificateNames_; // of String.
       double nextRefresh_;
       double refreshPeriod_;
-    };
+    }
 
-    private final boolean isSecurityV1_;
+      private final boolean isSecurityV1_;
     private final CertificateCache certificateCache_ = new CertificateCache();
     private final CertificateCacheV2 certificateCacheV2_ = new CertificateCacheV2();
     // refreshDirectories_ maps the directory name to a DirectoryInfo of
@@ -831,9 +831,9 @@ public class ConfigPolicyManager extends PolicyManager {
     // next refresh time.
     // Use HashMap without generics so it works with older Java compilers.
     private final HashMap refreshDirectories_ = new HashMap();
-  };
+  }
 
-  /**
+    /**
    * The configuration file allows 'trust anchor' certificates to be preloaded.
    * The certificates may also be loaded from a directory, and if the 'refresh'
    * option is set to an interval, the certificates are reloaded at the
@@ -1119,7 +1119,7 @@ public class ConfigPolicyManager extends PolicyManager {
     }
 
     // Add the substring after the last match.
-    result += expansion.substring(beginIndex, expansion.length());
+    result += expansion.substring(beginIndex);
     return result;
   }
 

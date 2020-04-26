@@ -90,10 +90,7 @@ public class Sqlite3ProducerDb extends Sqlite3ProducerDbBase {
       try {
         ResultSet result = statement.executeQuery();
 
-        if (result.next())
-          return true;
-        else
-          return false;
+          return result.next();
       } finally {
         statement.close();
       }

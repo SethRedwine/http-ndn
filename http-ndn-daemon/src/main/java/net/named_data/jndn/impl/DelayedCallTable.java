@@ -131,5 +131,5 @@ public class DelayedCallTable {
   private final ArrayList<Entry> table_ = new ArrayList<Entry>();
   private double nowOffsetMilliseconds_ = 0;
   // This is to force an import of net.named_data.jndn.util.
-  private static Common dummyCommon_ = new Common();
+  private static final Common dummyCommon_ = new Common();
 }

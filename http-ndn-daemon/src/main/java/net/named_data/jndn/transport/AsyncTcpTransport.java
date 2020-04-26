@@ -428,7 +428,7 @@ public class AsyncTcpTransport extends Transport
   private final CompletionHandler<Integer, Void> readCompletionHandler_;
   private final CompletionHandler<Integer, ByteBuffer> writeCompletionHandler_;
   private final ScheduledExecutorService threadPool_;
-  private ByteBuffer inputBuffer_ = ByteBuffer.allocate(Common.MAX_NDN_PACKET_SIZE);
+  private final ByteBuffer inputBuffer_ = ByteBuffer.allocate(Common.MAX_NDN_PACKET_SIZE);
   private ElementReader elementReader_;
   private ConnectionInfo connectionInfo_;
   private boolean isLocal_;

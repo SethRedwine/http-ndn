@@ -158,5 +158,5 @@ public class PSyncState {
 
   public static final int Tlv_PSyncContent = 128;
 
-  private ArrayList<Name> content_ = new ArrayList<Name>();
+  private final ArrayList<Name> content_ = new ArrayList<Name>();
 }

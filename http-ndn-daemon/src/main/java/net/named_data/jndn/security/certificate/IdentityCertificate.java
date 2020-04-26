@@ -155,10 +155,7 @@ public class IdentityCertificate extends Certificate {
         break;
     }
 
-    if (keyIdx >= name.size())
-      return false;
-
-    return true;
+      return keyIdx < name.size();
   }
 
   private void

@@ -232,7 +232,7 @@ public class BoostInfoTree {
   }
 
   // We can't use a map for subtrees_ because we want the keys to be in order.
-  private ArrayList<TreeEntry> subtrees_ = new ArrayList<TreeEntry>();
+  private final ArrayList<TreeEntry> subtrees_ = new ArrayList<TreeEntry>();
   private String value_ = "";
   private BoostInfoTree parent_ = null;
   private BoostInfoTree lastChild_ = null;

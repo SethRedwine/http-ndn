@@ -450,10 +450,10 @@ public class Producer {
     KeyRequest keyRequest = (KeyRequest)keyRequests_.get(timeCount);
 
     Name interestName = interest.getName();
-    if ((int)(Integer)keyRequest.repeatAttempts.get(interestName) < maxRepeatAttempts_) {
+    if ((Integer)keyRequest.repeatAttempts.get(interestName) < maxRepeatAttempts_) {
       // Increase the retrial count.
       keyRequest.repeatAttempts.put
-        (interestName, (int)(Integer)keyRequest.repeatAttempts.get(interestName) + 1);
+        (interestName, (Integer)keyRequest.repeatAttempts.get(interestName) + 1);
       sendKeyInterest(interest, timeSlot, onEncryptedKeys, onError);
     }
     else

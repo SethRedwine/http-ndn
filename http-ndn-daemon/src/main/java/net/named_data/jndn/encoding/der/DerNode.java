@@ -792,7 +792,7 @@ public class DerNode {
 
       String result = firstDigit + "." + secondDigit;
       for (int i = 1; i < components.size(); ++i)
-        result += "." + (Integer)components.get(i);
+        result += "." + components.get(i);
 
       return result;
     }
@@ -866,7 +866,7 @@ public class DerNode {
     toDerTimeString(double msSince1970)
     {
       Date utcTime = Common.millisecondsSince1970ToDate
-        ((long)Math.round(msSince1970));
+        (Math.round(msSince1970));
       return dateFormat_.format(utcTime);
     }
 

@@ -151,5 +151,5 @@ public class PSyncUserPrefixes {
   public final HashMap<Name, Object> prefixes_ = new HashMap<Name, Object>();
   private static final Logger logger_ = Logger.getLogger(PSyncUserPrefixes.class.getName());
   // This is to force an import of net.named_data.jndn.util.
-  private static Common dummyCommon_ = new Common();
+  private static final Common dummyCommon_ = new Common();
 }

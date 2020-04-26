@@ -126,5 +126,5 @@ public class InterestValidationState extends ValidationState {
   private static final Logger logger_ =
     Logger.getLogger(InterestValidationState.class.getName());
   // This is to force an import of net.named_data.jndn.util.
-  private static Common dummyCommon_ = new Common();
+  private static final Common dummyCommon_ = new Common();
 }

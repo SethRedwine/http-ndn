@@ -231,7 +231,7 @@ public final class SyncStateProto {
           internalGetValueMap() {
         return internalValueMap;
       }
-      private static com.google.protobuf.Internal.EnumLiteMap<ActionType>
+      private static final com.google.protobuf.Internal.EnumLiteMap<ActionType>
           internalValueMap =
             new com.google.protobuf.Internal.EnumLiteMap<ActionType>() {
               public ActionType findValueByNumber(int number) {
@@ -266,7 +266,7 @@ public final class SyncStateProto {
       private final int index;
       private final int value;
 
-      private ActionType(int index, int value) {
+      ActionType(int index, int value) {
         this.index = index;
         this.value = value;
       }
@@ -661,14 +661,10 @@ public final class SyncStateProto {
 
         public final boolean isInitialized() {
           if (!hasSeq()) {
-            
+
             return false;
           }
-          if (!hasSession()) {
-            
-            return false;
-          }
-          return true;
+            return hasSession();
         }
 
         public Builder mergeFrom(
@@ -782,7 +778,7 @@ public final class SyncStateProto {
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
+        com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
@@ -798,7 +794,7 @@ public final class SyncStateProto {
         getNameBytes() {
       java.lang.Object ref = name_;
       if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
+        com.google.protobuf.ByteString b =
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
         name_ = b;
@@ -1143,18 +1139,15 @@ public final class SyncStateProto {
 
       public final boolean isInitialized() {
         if (!hasName()) {
-          
+
           return false;
         }
         if (!hasType()) {
-          
+
           return false;
         }
         if (hasSeqno()) {
-          if (!getSeqno().isInitialized()) {
-            
-            return false;
-          }
+            return getSeqno().isInitialized();
         }
         return true;
       }
@@ -1209,7 +1202,7 @@ public final class SyncStateProto {
           getNameBytes() {
         java.lang.Object ref = name_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString b =
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
           name_ = b;
@@ -1392,7 +1385,7 @@ public final class SyncStateProto {
        * <code>optional .net.named_data.jndn.sync.SyncState.SeqNo seqno = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          net.named_data.jndn.sync.SyncStateProto.SyncState.SeqNo, net.named_data.jndn.sync.SyncStateProto.SyncState.SeqNo.Builder, net.named_data.jndn.sync.SyncStateProto.SyncState.SeqNoOrBuilder> 
+          net.named_data.jndn.sync.SyncStateProto.SyncState.SeqNo, net.named_data.jndn.sync.SyncStateProto.SyncState.SeqNo.Builder, net.named_data.jndn.sync.SyncStateProto.SyncState.SeqNoOrBuilder>
           getSeqnoFieldBuilder() {
         if (seqnoBuilder_ == null) {
           seqnoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
@@ -1458,7 +1451,7 @@ public final class SyncStateProto {
     /**
      * <code>repeated .net.named_data.jndn.sync.SyncState ss = 1;</code>
      */
-    java.util.List<net.named_data.jndn.sync.SyncStateProto.SyncState> 
+    java.util.List<net.named_data.jndn.sync.SyncStateProto.SyncState>
         getSsList();
     /**
      * <code>repeated .net.named_data.jndn.sync.SyncState ss = 1;</code>
@@ -1471,7 +1464,7 @@ public final class SyncStateProto {
     /**
      * <code>repeated .net.named_data.jndn.sync.SyncState ss = 1;</code>
      */
-    java.util.List<? extends net.named_data.jndn.sync.SyncStateProto.SyncStateOrBuilder> 
+    java.util.List<? extends net.named_data.jndn.sync.SyncStateProto.SyncStateOrBuilder>
         getSsOrBuilderList();
     /**
      * <code>repeated .net.named_data.jndn.sync.SyncState ss = 1;</code>
@@ -1592,7 +1585,7 @@ public final class SyncStateProto {
     /**
      * <code>repeated .net.named_data.jndn.sync.SyncState ss = 1;</code>
      */
-    public java.util.List<? extends net.named_data.jndn.sync.SyncStateProto.SyncStateOrBuilder> 
+    public java.util.List<? extends net.named_data.jndn.sync.SyncStateProto.SyncStateOrBuilder>
         getSsOrBuilderList() {
       return ss_;
     }
@@ -1847,7 +1840,7 @@ public final class SyncStateProto {
               ssBuilder_ = null;
               ss_ = other.ss_;
               bitField0_ = (bitField0_ & ~0x00000001);
-              ssBuilder_ = 
+              ssBuilder_ =
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getSsFieldBuilder() : null;
             } else {
@@ -1862,7 +1855,7 @@ public final class SyncStateProto {
       public final boolean isInitialized() {
         for (int i = 0; i < getSsCount(); i++) {
           if (!getSs(i).isInitialized()) {
-            
+
             return false;
           }
         }
@@ -2083,7 +2076,7 @@ public final class SyncStateProto {
       /**
        * <code>repeated .net.named_data.jndn.sync.SyncState ss = 1;</code>
        */
-      public java.util.List<? extends net.named_data.jndn.sync.SyncStateProto.SyncStateOrBuilder> 
+      public java.util.List<? extends net.named_data.jndn.sync.SyncStateProto.SyncStateOrBuilder>
            getSsOrBuilderList() {
         if (ssBuilder_ != null) {
           return ssBuilder_.getMessageOrBuilderList();
@@ -2109,12 +2102,12 @@ public final class SyncStateProto {
       /**
        * <code>repeated .net.named_data.jndn.sync.SyncState ss = 1;</code>
        */
-      public java.util.List<net.named_data.jndn.sync.SyncStateProto.SyncState.Builder> 
+      public java.util.List<net.named_data.jndn.sync.SyncStateProto.SyncState.Builder>
            getSsBuilderList() {
         return getSsFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          net.named_data.jndn.sync.SyncStateProto.SyncState, net.named_data.jndn.sync.SyncStateProto.SyncState.Builder, net.named_data.jndn.sync.SyncStateProto.SyncStateOrBuilder> 
+          net.named_data.jndn.sync.SyncStateProto.SyncState, net.named_data.jndn.sync.SyncStateProto.SyncState.Builder, net.named_data.jndn.sync.SyncStateProto.SyncStateOrBuilder>
           getSsFieldBuilder() {
         if (ssBuilder_ == null) {
           ssBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
@@ -2141,18 +2134,18 @@ public final class SyncStateProto {
 
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_net_named_data_jndn_sync_SyncState_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+  private static final
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_net_named_data_jndn_sync_SyncState_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_net_named_data_jndn_sync_SyncState_SeqNo_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+  private static final
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_net_named_data_jndn_sync_SyncState_SeqNo_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_net_named_data_jndn_sync_SyncStateMsg_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+  private static final
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_net_named_data_jndn_sync_SyncStateMsg_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor

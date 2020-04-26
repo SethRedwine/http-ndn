@@ -76,5 +76,5 @@ public class TpmKeyHandleMemory extends TpmKeyHandle {
     }
   }
 
-  private TpmPrivateKey key_;
+  private final TpmPrivateKey key_;
 }

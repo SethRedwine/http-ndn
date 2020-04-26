@@ -7,7 +7,7 @@ import java.util.Hashtable;
 
 /**
  * Class for HTTP request parsing as defined by RFC 2612:
- * 
+ *
  * Request = Request-Line ; Section 5.1 (( general-header ; Section 4.5 |
  * request-header ; Section 5.3 | entity-header ) CRLF) ; Section 7.1 CRLF [
  * message-body ] ; Section 4.3
@@ -22,16 +22,16 @@ public class HttpRequestResponseParser {
     private String _responseCode;
     private String _responseDescription;
     private final Hashtable<String, String> _requestHeaders;
-    private final StringBuffer _messagetBody;
+    private final StringBuffer _messageBody;
 
     public HttpRequestResponseParser() {
         _requestHeaders = new Hashtable<String, String>();
-        _messagetBody = new StringBuffer();
+        _messageBody = new StringBuffer();
     }
 
     /**
      * Parse and HTTP request.
-     * 
+     *
      * @param request String holding http request.
      * @throws IOException         If an I/O error occurs reading the input stream.
      * @throws HttpFormatException If HTTP Request is malformed
@@ -56,12 +56,12 @@ public class HttpRequestResponseParser {
     }
 
     /**
-     * 
+     *
      * 5.1 Request-Line The Request-Line begins with a method token, followed by the
      * Request-URI and the protocol version, and ending with CRLF. The elements are
      * separated by SP characters. No CR or LF is allowed except in the final CRLF
      * sequence.
-     * 
+     *
      * @return String with Request-Line
      */
     public String getRequestLine() {
@@ -108,7 +108,7 @@ public class HttpRequestResponseParser {
             throw new HttpFormatException("Invalid Request-Line: " + requestLine);
         }
         _requestLine = requestLine;
-        String splitLine[] = requestLine.split("\\s");
+        String[] splitLine = requestLine.split("\\s");
         if (splitLine[0].matches("GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH")
                 && splitLine[2].indexOf("HTTP/") == 0) {
             _requestMethod = splitLine[0];
@@ -138,7 +138,7 @@ public class HttpRequestResponseParser {
         if (idx == -1) {
             throw new HttpFormatException("Invalid Header Parameter: " + header);
         }
-        _requestHeaders.put(header.substring(0, idx), header.substring(idx + 1, header.length()));
+        _requestHeaders.put(header.substring(0, idx), header.substring(idx + 1));
     }
 
     /**
@@ -146,20 +146,20 @@ public class HttpRequestResponseParser {
      * associated with the request or response. The message-body differs from the
      * entity-body only when a transfer-coding has been applied, as indicated by the
      * Transfer-Encoding header field (section 14.41).
-     * 
+     *
      * @return String with message-body
      */
     public String getMessageBody() {
-        return _messagetBody.toString();
+        return _messageBody.toString();
     }
 
     private void appendMessageBody(final String bodyLine) {
-        _messagetBody.append(bodyLine).append("\r\n");
+        _messageBody.append(bodyLine).append("\r\n");
     }
 
     /**
      * For list of available headers refer to sections: 4.5, 5.3, 7.1 of RFC 2616
-     * 
+     *
      * @param headerName Name of header
      * @return String with the value of the header or null if not found.
      */
@@ -168,7 +168,7 @@ public class HttpRequestResponseParser {
     }
 
     /**
-     * 
+     *
      * @return Hashtable<String, String> of parsed headers
      */
     public Hashtable<String, String> getHeaders() {
@@ -177,7 +177,7 @@ public class HttpRequestResponseParser {
 
     @Override
     public String toString() {
-        return "HttpRequestResponseParser [\n\t_httpVersion=" + _httpVersion + ", \n\t_messagetBody=" + _messagetBody
+        return "HttpRequestResponseParser [\n\t_httpVersion=" + _httpVersion + ", \n\t_messagetBody=" + _messageBody
                 + ", \n\t_requestHeaders=" + _requestHeaders + ",\n\t _requestLine=" + _requestLine + ", \n\t_requestMethod="
                 + _requestMethod + ", \n\t_requestUrl=" + _requestUrl + ", \n\t_responseCode=" + _responseCode
                 + ", \n\t_responseDescription=" + _responseDescription + "\n]";

@@ -32,7 +32,7 @@ public class NetworkNack {
    * Reason.OTHER_CODE and you can call getOtherReasonCode(). We do this to keep
    * the recognized reason values independent of packet encoding formats.
    */
-  public static enum Reason {
+  public enum Reason {
     NONE      (0),
     CONGESTION(50),
     DUPLICATE (100),

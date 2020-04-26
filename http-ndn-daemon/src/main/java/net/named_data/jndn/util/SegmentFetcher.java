@@ -766,7 +766,7 @@ public class SegmentFetcher implements OnData, OnDataValidationFailed, OnTimeout
         afterNackOrTimeout(segmentNum);
     }
 
-    private Runnable rtoTimeoutRunnable_ = new Runnable() {
+    private final Runnable rtoTimeoutRunnable_ = new Runnable() {
         public void run() {
             if (shouldStop()) return;
 
@@ -909,17 +909,17 @@ public class SegmentFetcher implements OnData, OnDataValidationFailed, OnTimeout
     private final Options options_;
     private double ssThresh_;
     private final Face face_;
-    private RttEstimator rttEstimator_;
+    private final RttEstimator rttEstimator_;
 
     private long highData_ = 0;
     private long recPoint_ = 0;
     private long highInterest_ = 0;
-    private Interest baseInterest_;
+    private final Interest baseInterest_;
     private int nSegmentsInFlight_ = 0;
     private long nSegments_ = -1;
-    private Map<Long, PendingSegment> pendingSegments_ = new HashMap();
-    private Map<Long, Blob> receivedSegments_ = new HashMap();
-    private Queue<Long> retxQueue_ = new LinkedList<>();
+    private final Map<Long, PendingSegment> pendingSegments_ = new HashMap();
+    private final Map<Long, Blob> receivedSegments_ = new HashMap();
+    private final Queue<Long> retxQueue_ = new LinkedList<>();
     private long nextSegmentNum_ = 0;
     private long timeLastSegmentReceived_ = 0;
     private Name versionedDataName_;

@@ -62,10 +62,7 @@ public class AndroidSqlite3ProducerDb extends Sqlite3ProducerDbBase {
       (SELECT_hasContentKey, new String[] { Integer.toString(fixedTimeSlot) });
 
     try {
-      if (cursor.moveToNext())
-        return true;
-      else
-        return false;
+        return cursor.moveToNext();
     } finally {
       cursor.close();
     }

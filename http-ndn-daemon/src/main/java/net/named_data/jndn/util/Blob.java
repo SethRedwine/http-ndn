@@ -21,6 +21,7 @@ package net.named_data.jndn.util;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 
 /**
  * A Blob holds a pointer to an immutable ByteBuffer.  We use an immutable
@@ -135,13 +136,8 @@ public class Blob implements Comparable {
   Blob(String value)
   {
     byte[] utf8;
-    try {
-      utf8 = value.getBytes("UTF-8");
-    } catch (UnsupportedEncodingException ex) {
-      // We don't expect this to happen.
-      throw new Error("UTF-8 encoder not supported: " + ex.getMessage());
-    }
-    buffer_ = ByteBuffer.allocate(utf8.length);
+      utf8 = value.getBytes(StandardCharsets.UTF_8);
+      buffer_ = ByteBuffer.allocate(utf8.length);
     buffer_.put(utf8);
     buffer_.flip();
   }
@@ -361,12 +357,7 @@ public class Blob implements Comparable {
     if (buffer_ == null)
       return "";
     else {
-      try {
-        return new String(getImmutableArray(), "UTF-8");
-      } catch (UnsupportedEncodingException ex) {
-        // We don't expect this to happen.
-        throw new Error("UTF-8 decoder not supported: " + ex.getMessage());
-      }
+        return new String(getImmutableArray(), StandardCharsets.UTF_8);
     }
   }
 

@@ -335,5 +335,5 @@ public class TpmBackEndFile extends TpmBackEnd {
     return new File(keyStorePath_, new Blob(digest, false).toHex() + ".privkey");
   }
 
-  private File keyStorePath_;
+  private final File keyStorePath_;
 }

@@ -56,7 +56,7 @@ public class NdnRegexComponentSetMatcher extends NdnRegexMatcherBase {
 
     matchResult_.clear();
 
-    if (isInclusion_ ? isMatched : !isMatched) {
+    if (isInclusion_ == isMatched) {
       matchResult_.add(name.get(offset));
       return true;
     }

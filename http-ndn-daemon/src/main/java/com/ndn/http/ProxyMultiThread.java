@@ -1,21 +1,18 @@
 package com.ndn.http;
 
-import java.io.*;
-import java.net.*;
-import java.nio.ByteBuffer;
-// import java.util.*;
-import java.util.concurrent.CompletableFuture;
-
-import com.ndn.http.utils.HttpFormatException;
 import com.ndn.http.utils.HttpRequestResponseParser;
-import com.ndn.http.utils.InterestCallback;
+import com.ndn.http.utils.HttpUtils;
 import com.ndn.http.utils.NdnUtils;
-
+import com.ndn.http.utils.RequestInterestCallback;
 import net.named_data.jndn.Interest;
 import net.named_data.jndn.Name;
-import net.named_data.jndn.OnData;
-import net.named_data.jndn.OnTimeout;
-import net.named_data.jndn.Data;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.SocketException;
 
 public class ProxyMultiThread {
     private static ServerSocket server;
@@ -34,41 +31,35 @@ public class ProxyMultiThread {
             final int remoteport = 3000;
             final int localHttpPort = 9999;
 
-            // TestPublishAsyncNfd.extracted();
             // Print a start-up message
             System.out.println(
                     "Starting HTTP-NDN translator for " + host + ":" + remoteport + " on port " + localHttpPort);
             server = new ServerSocket(localHttpPort);
 
             NdnUtils ndnUtils = NdnUtils.get();
-                ndnUtils.registerPrefix(host, remoteport);
+            NdnUtils.registerPrefix(ndnUtils.BASE_URI,false);
+
+            HttpUtils.allowHttpMethods("GET", "POST", "HEAD", "OPTIONS", "PUT", "DELETE", "TRACE", "CONNECT");
 
             while (true) {
                 new ThreadProxy(server.accept(), host, remoteport);
             }
         } catch (final Exception e) {
             System.err.println(e);
-            System.err.println("Usage: java ProxyMultiThread " + "<host> <remoteport> <localHttpPort>");
+//            System.err.println("Usage: java ProxyMultiThread " + "<host> <remoteport> <localHttpPort>");
         }
     }
 }
 
-/**
- * Handles a socket connection to the proxy server from the client and uses 2
- * threads to proxy between server and client
- *
- */
 class ThreadProxy extends Thread {
     private final Socket sClient;
     private final String SERVER_URL;
     private final int SERVER_PORT;
-    // private final NdnUtils ndnUtils;
 
     ThreadProxy(final Socket sClient, final String ServerUrl, final int ServerPort) {
         this.SERVER_URL = ServerUrl;
         this.SERVER_PORT = ServerPort;
         this.sClient = sClient;
-        // this.ndnUtils = ndnUtils;
         this.start();
     }
 
@@ -80,39 +71,49 @@ class ThreadProxy extends Thread {
             final OutputStream outToClient = sClient.getOutputStream();
 
             // a new thread for uploading to the server
-            new Thread() {
-                public void run() {
-                    int bytes_read;
-                    try {
-                        while ((bytes_read = inFromClient.read(request)) != -1) {
-                            final HttpRequestResponseParser parser = new HttpRequestResponseParser();
-                            final String req = new String(request);
-                            parser.parseRequest(req);
-                            System.out.println("\nREQUEST: " + parser.getRequestUrl());
+            new Thread(() -> {
+                try {
+                    while (inFromClient.read(request) != -1) {
+                        final HttpRequestResponseParser parser = new HttpRequestResponseParser();
+                        final String req = new String(request);
+                        parser.parseRequest(req);
 
-                            NdnUtils ndnUtils = NdnUtils.get();
-
-                            final Name name = new Name(ndnUtils.BASE_URI + "/" + parser.getHttpVersion() + "/"
-                                    + parser.getRequestMethod() + "/" + parser.getRequestUrl());
-                            final Interest interest = new Interest(name);
-
-                            InterestCallback call = new InterestCallback(outToClient, SERVER_URL, SERVER_PORT);
-                            ndnUtils.sendInterest(interest, call);
-
-                            // outToServer.write(request, 0, bytes_read);
-                            // outToServer.flush();
+                        if (parser.getRequestUrl().contains("https://")) {
+                            System.out.println("Error: HTTPS not supported");
+                            return;
                         }
-                    } catch (final Exception e) {
-                        e.printStackTrace();
+
+                        System.out.println("\nREQUEST: " + parser.getRequestUrl() + "\n" + parser.getMessageBody());
+
+                        String url = parser.getRequestUrl().replace("http://", "");
+                        if (url.charAt(0) == '/') {
+                            url = SERVER_URL + ":" + SERVER_PORT + url;
+                        }
+
+                        RequestInterestCallback call = new RequestInterestCallback(outToClient);
+
+                        if (parser.getMessageBody() == null || parser.getMessageBody().trim().isBlank()) {
+                            final Name name = new Name(String.format("%s/%s/%s/%s/%s",
+                                NdnUtils.BASE_URI, parser.getHttpVersion(), parser.getRequestMethod(),
+                                HttpUtils.buildHeaderString(parser.getHeaders()), url));
+                            final Interest interest = new Interest(name);
+                            NdnUtils.sendInterest(interest, call);
+                        } else {
+                            // Handle requests with bodies
+                            final Name name = new Name(String.format("%s/%s/multi/%s/%s/%s/%s",
+                                NdnUtils.BASE_URI, parser.getHttpVersion(), NdnUtils.generateRandomString(), parser.getRequestMethod(),
+                                HttpUtils.buildHeaderString(parser.getHeaders()), url));
+                            final Interest interest = new Interest(name);
+                            NdnUtils.handleMultipacketRequest(interest, call, parser.getMessageBody());
+                        }
                     }
-                    // try {
-                    // outToServer.close();
-                    // System.out.println("Closed stream: outToServer");
-                    // } catch (final IOException e) {
+                } catch (final SocketException e) {
+                    // Socket Closed
                     // e.printStackTrace();
-                    // }
+                } catch (final Exception e) {
+                    e.printStackTrace();
                 }
-            }.start();
+            }).start();
         } catch (final IOException e) {
             e.printStackTrace();
         }

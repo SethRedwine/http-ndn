@@ -96,12 +96,10 @@ public class KeyLocator implements ChangeCountable {
       return false;
 
     if (type_ == KeyLocatorType.KEYNAME) {
-      if (!getKeyName().equals(other.getKeyName()))
-        return false;
+        return getKeyName().equals(other.getKeyName());
     }
     else if (type_ == KeyLocatorType.KEY_LOCATOR_DIGEST) {
-      if (!getKeyData().equals(other.getKeyData()))
-        return false;
+        return getKeyData().equals(other.getKeyData());
     }
 
     return true;

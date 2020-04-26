@@ -53,7 +53,7 @@ public class Node implements ElementListener {
   /**
    * Create a new Node for communication with an NDN hub with the given Transport
    * object and connectionInfo.
-   * 
+   *
    * @param transport      A Transport object used for communication.
    * @param connectionInfo A Transport.ConnectionInfo to be used to connect to the
    *                       transport.
@@ -65,7 +65,7 @@ public class Node implements ElementListener {
 
   /**
    * Enable or disable Interest loopback.
-   * 
+   *
    * @param interestLoopbackEnabled If True, enable Interest loopback, otherwise
    *                                disable it.
    */
@@ -76,7 +76,7 @@ public class Node implements ElementListener {
   /**
    * Send the Interest through the transport, read the entire response and call
    * onData, onTimeout or onNetworkNack as described below.
-   * 
+   *
    * @param pendingInterestId The getNextEntryId() for the pending interest ID
    *                          which Face got so it could return it to the caller.
    * @param interestCopy      The Interest which is NOT copied for this internal
@@ -195,7 +195,7 @@ public class Node implements ElementListener {
    * interest table. This does not affect another pending interest with a
    * different pendingInterestId, even if it has the same interest name. If there
    * is no entry with the pendingInterestId, do nothing.
-   * 
+   *
    * @param pendingInterestId The ID returned from expressInterest.
    */
   public final void removePendingInterest(long pendingInterestId) {
@@ -206,7 +206,7 @@ public class Node implements ElementListener {
    * Append a timestamp component and a random value component to interest's name.
    * Then use the keyChain and certificateName to sign the interest. If the
    * interest lifetime is not set, this sets it.
-   * 
+   *
    * @param interest        The interest whose name is append with components.
    * @param keyChain        The KeyChain object for signing interests.
    * @param certificateName The certificate name for signing interests.
@@ -224,7 +224,7 @@ public class Node implements ElementListener {
    * Register prefix with the connected NDN hub and call onInterest when a
    * matching interest is received. To register a prefix with NFD, you must first
    * call setCommandSigningInfo.
-   * 
+   *
    * @param registeredPrefixId     The getNextEntryId() for the registered prefix
    *                               ID which Face got so it could return it to the
    *                               caller.
@@ -273,7 +273,7 @@ public class Node implements ElementListener {
    * a different registeredPrefixId, even if it has the same prefix name. If an
    * interest filter was automatically created by registerPrefix, also remove it.
    * If there is no entry with the registeredPrefixId, do nothing.
-   * 
+   *
    * @param registeredPrefixId The ID returned from registerPrefix.
    */
   public final void removeRegisteredPrefix(long registeredPrefixId) {
@@ -286,7 +286,7 @@ public class Node implements ElementListener {
    * library's local callback table and does not register the prefix with the
    * forwarder. It will always succeed. To register a prefix with the forwarder,
    * use registerPrefix.
-   * 
+   *
    * @param interestFilterId The getNextEntryId() for the interest filter ID which
    *                         Face got so it could return it to the caller.
    * @param filter           The InterestFilter with a prefix and optional regex
@@ -307,7 +307,7 @@ public class Node implements ElementListener {
    * interest filter table. This does not affect another interest filter with a
    * different interestFilterId, even if it has the same prefix name. If there is
    * no entry with the interestFilterId, do nothing.
-   * 
+   *
    * @param interestFilterId The ID returned from setInterestFilter.
    */
   public final void unsetInterestFilter(long interestFilterId) {
@@ -317,7 +317,7 @@ public class Node implements ElementListener {
   /**
    * The OnInterestCallback calls this to put a Data packet which satisfies an
    * Interest.
-   * 
+   *
    * @param data       The Data packet which satisfies the interest.
    * @param wireFormat A WireFormat object used to encode the Data packet.
    * @throws Error If the encoded Data packet size exceeds getMaxNdnPacketSize().
@@ -347,7 +347,7 @@ public class Node implements ElementListener {
 
   /**
    * Send the encoded packet out through the transport.
-   * 
+   *
    * @param encoding The array of bytes for the encoded packet to send. This reads
    *                 from position() to limit(), but does not change the position.
    * @throws Error If the encoded packet size exceeds getMaxNdnPacketSize().
@@ -362,7 +362,7 @@ public class Node implements ElementListener {
   /**
    * The OnInterest callback can call this to put a Nack for the received
    * Interest.
-   * 
+   *
    * @param interest    The Interest to put in the Nack packet.
    * @param networkNack The NetworkNack with the reason code. For example, new
    *                    NetworkNack().setReason(NetworkNack.Reason.NO_ROUTE).
@@ -472,7 +472,7 @@ public class Node implements ElementListener {
   /**
    * Check if the face is local based on the current connection through the
    * Transport; some Transport may cause network IO (e.g. an IP host name lookup).
-   * 
+   *
    * @return True if the face is local, false if not.
    * @throws IOException
    */
@@ -493,7 +493,7 @@ public class Node implements ElementListener {
   /**
    * Get the practical limit of the size of a network-layer packet. If a packet is
    * larger than this, the library or application MAY drop it.
-   * 
+   *
    * @return The maximum NDN packet size.
    */
   public static int getMaxNdnPacketSize() {
@@ -503,7 +503,7 @@ public class Node implements ElementListener {
   /**
    * Call callback.run() after the given delay. This adds to delayedCallTable_
    * which is used by processEvents().
-   * 
+   *
    * @param delayMilliseconds The delay in milliseconds.
    * @param callback          This calls callback.run() after the delay.
    */
@@ -517,7 +517,7 @@ public class Node implements ElementListener {
    * for the pending interest table (there usually are not many interest filter
    * table entries) so we use a common pool to only have to do the thread safe
    * lock in one method which is called by Face.
-   * 
+   *
    * @return The next entry ID.
    */
   public long getNextEntryId() {
@@ -530,7 +530,7 @@ public class Node implements ElementListener {
    * This is used in callLater for when the pending interest expires. If the
    * pendingInterest is still in the pendingInterestTable_, remove it and call its
    * onTimeout callback.
-   * 
+   *
    * @param pendingInterest The pending interest to check.
    */
   private void processInterestTimeout(PendingInterestTable.Entry pendingInterest) {
@@ -542,7 +542,7 @@ public class Node implements ElementListener {
    * Do the work of expressInterest once we know we are connected. Add the entry
    * to the PIT, encode and send the interest. If Interest loopback is enabled,
    * then also call dispatchInterest.
-   * 
+   *
    * @param pendingInterestId The getNextEntryId() for the pending interest ID
    *                          which Face got so it could return it to the caller.
    * @param interestCopy      The Interest to send, which has already been copied
@@ -599,7 +599,7 @@ public class Node implements ElementListener {
   /**
    * Call the OnInterest callback for all entries in the interestFilterTable_ that
    * match the interest.
-   * 
+   *
    * @param interest The Interest to match.
    */
   private void dispatchInterest(Interest interest) {
@@ -622,7 +622,7 @@ public class Node implements ElementListener {
   /**
    * Extract entries from the pendingInterestTable_ which match data, and call
    * each OnData callback.
-   * 
+   *
    * @param data The Data packet to match.
    * @return True if the data matched an entry in the pendingInterestTable_.
    */
@@ -656,7 +656,7 @@ public class Node implements ElementListener {
 
     /**
      * We received the response.
-     * 
+     *
      * @param interest
      * @param responseData
      */
@@ -721,7 +721,7 @@ public class Node implements ElementListener {
 
     /**
      * We timed out waiting for the response.
-     * 
+     *
      * @param timedOutInterest
      */
     public void onTimeout(Interest timedOutInterest) {
@@ -768,7 +768,7 @@ public class Node implements ElementListener {
 
   /**
    * Do the work of registerPrefix to register with NFD.
-   * 
+   *
    * @param registeredPrefixId     The getNextEntryId() which registerPrefix got
    *                               so it could return it to the caller. If this is
    *                               0, then don't add to registeredPrefixTable_
@@ -860,7 +860,7 @@ public class Node implements ElementListener {
    * Encode the interest into an NDN-TLV LpPacket as a NACK with the reason code
    * in the networkNack object. TODO: Generalize this and move to
    * WireFormat.encodeLpPacket.
-   * 
+   *
    * @param interest    The Interest to put in the LpPacket fragment.
    * @param networkNack The NetworkNack with the reason code.
    * @return A Blob containing the encoding.
@@ -909,6 +909,6 @@ public class Node implements ElementListener {
   private final Object lastEntryIdLock_ = new Object();
   private ConnectStatus connectStatus_ = ConnectStatus.UNCONNECTED;
   boolean interestLoopbackEnabled_ = false;
-  private static Blob nonceTemplate_ = new Blob(new byte[] { 0, 0, 0, 0 });
+  private static final Blob nonceTemplate_ = new Blob(new byte[] { 0, 0, 0, 0 });
   private static final Logger logger_ = Logger.getLogger(Node.class.getName());
 }

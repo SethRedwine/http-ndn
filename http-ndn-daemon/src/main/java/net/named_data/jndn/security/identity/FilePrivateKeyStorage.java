@@ -27,6 +27,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.KeyFactory;
 import java.security.KeyPair;
@@ -448,13 +449,8 @@ public class FilePrivateKeyStorage extends PrivateKeyStorage {
   nameTransform(String keyName, String extension) throws SecurityException
   {
     byte[] hash;
-    try {
-      hash = Common.digestSha256(keyName.getBytes("UTF-8"));
-    } catch (UnsupportedEncodingException ex) {
-      // We don't expect this to happen.
-      throw new Error("UTF-8 encoder not supported: " + ex.getMessage());
-    }
-    String digest = Common.base64Encode(hash);
+      hash = Common.digestSha256(keyName.getBytes(StandardCharsets.UTF_8));
+      String digest = Common.base64Encode(hash);
     digest = digest.replace('/', '%');
 
     return new File(keyStorePath_, digest + extension);
@@ -567,8 +563,8 @@ public class FilePrivateKeyStorage extends PrivateKeyStorage {
     return Common.base64Decode(contents.toString());
   }
 
-  static private String RSA_ENCRYPTION_OID = "1.2.840.113549.1.1.1";
-  static private String EC_ENCRYPTION_OID = "1.2.840.10045.2.1";
+  static private final String RSA_ENCRYPTION_OID = "1.2.840.113549.1.1.1";
+  static private final String EC_ENCRYPTION_OID = "1.2.840.10045.2.1";
 
   private final File keyStorePath_;
   // Use HashMap without generics so it works with older Java compilers.

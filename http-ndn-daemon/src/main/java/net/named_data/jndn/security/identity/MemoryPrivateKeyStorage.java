@@ -370,8 +370,8 @@ public class MemoryPrivateKeyStorage extends PrivateKeyStorage {
 
     public java.security.PrivateKey getPrivateKey() { return privateKey_; }
 
-    private KeyType keyType_;
-    private java.security.PrivateKey privateKey_;
+    private final KeyType keyType_;
+    private final java.security.PrivateKey privateKey_;
   }
 
   // Use HashMap without generics so it works with older Java compilers.

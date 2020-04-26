@@ -2435,7 +2435,7 @@ public class KeyChain {
    */
   private Signature
   prepareSignatureInfo(SigningInfo params, Name[] keyName)
-    throws PibImpl.Error, InvalidSigningInfoError, KeyChain.Error
+    throws PibImpl.Error, KeyChain.Error
   {
     PibIdentity identity = null;
     PibKey key = null;

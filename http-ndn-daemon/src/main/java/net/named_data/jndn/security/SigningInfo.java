@@ -31,7 +31,7 @@ import net.named_data.jndn.util.Common;
  * exist, or the PibIdentity or PibKey instance is not valid.
  */
 public class SigningInfo {
-  public static enum SignerType {
+  public enum SignerType {
     /** No signer is specified. Use default settings or follow the trust schema. */
     NULL,
     /** The signer is an identity. Use its default key and default certificate. */
@@ -410,5 +410,5 @@ public class SigningInfo {
   private ValidityPeriod validityPeriod_ = new ValidityPeriod();
 
   // This is to force an import of net.named_data.jndn.util.
-  private static Common dummyCommon_ = new Common();
+  private static final Common dummyCommon_ = new Common();
 }

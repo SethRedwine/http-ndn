@@ -509,11 +509,11 @@ public class MemoryContentCache implements OnInterestCallback {
   unregisterAll()
   {
     for (int i = 0; i < interestFilterIdList_.size(); ++i)
-      face_.unsetInterestFilter((long)interestFilterIdList_.get(i));
+      face_.unsetInterestFilter(interestFilterIdList_.get(i));
     interestFilterIdList_.clear();
 
     for (int i = 0; i < registeredPrefixIdList_.size(); ++i)
-      face_.removeRegisteredPrefix((long)registeredPrefixIdList_.get(i));
+      face_.removeRegisteredPrefix(registeredPrefixIdList_.get(i));
     registeredPrefixIdList_.clear();
 
     // Also clear each onDataNotFoundForPrefix given to registerPrefix.
